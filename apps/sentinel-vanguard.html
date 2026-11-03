@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel Vanguard — 3D Space Combat | MG Ghanbari</title>
+    <meta name="description" content="Sentinel Vanguard — a 3D space combat game: hangar and loadout, three weapons, shields and hull, bombs and overdrive, and bosses that arrive with their own health bar.">
+    <link rel="stylesheet" href="../detail.css">
+    <style>
+        .detail-hero img { object-position: top; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../index.html" class="nav-logo">MG Ghanbari</a>
+        <a href="../index.html" class="nav-back">&larr; Back to portfolio</a>
+    </header>
+
+    <main class="detail">
+
+        <div class="detail-hero">
+            <img src="../assets/vanguard/hero.webp" alt="Sentinel Vanguard title screen — the ship over a planet, main menu on the left">
+        </div>
+
+        <p class="detail-kicker">Apps &amp; Games</p>
+        <h1 class="detail-title">Sentinel Vanguard</h1>
+        <p class="detail-lede">
+            3D space combat with a tactical layer on top. You launch from a hangar, pick a loadout, and fly
+            against waves of fighters and rock — until a boss arrives with its name and a health bar across
+            the top of the screen.
+        </p>
+
+        <div class="detail-actions">
+            <a class="btn-primary" href="#gameplay">Watch the capture &rarr;</a>
+            <a class="btn-ghost" href="../index.html">&larr; All projects</a>
+        </div>
+
+        <section class="detail-section">
+            <h2>Overview</h2>
+            <p>
+                Sentinel Vanguard is built as a real-time 3D game rather than a 2D shooter. The ship, the
+                enemies and the boss are GLB models lit inside a starfield, and the camera sits behind the
+                hull so every manoeuvre has weight to it.
+            </p>
+            <p>
+                Around the combat sits a shell that most shooters skip: a hangar where the ship and loadout
+                are configured, a briefing with objectives, achievements that tick up as milestones land, a
+                pilot rank and a credit balance, and a settings panel with a game-speed multiplier and a
+                high-contrast mode. The HUD during play keeps ship status, shields and hull, the weapon and
+                its ammo, bombs and the overdrive state in one column — everything you need to read in a
+                half-second glance.
+            </p>
+        </section>
+
+        <section class="detail-section" id="gameplay">
+            <h2>Gameplay capture</h2>
+            <p>
+                A full minute of the build — the hangar, the weapon configuration, then the launch: asteroids,
+                fighters, pickups and the boss interception.
+            </p>
+            <video class="film" controls playsinline preload="metadata" poster="../assets/vanguard/poster.webp">
+                <source src="../assets/vanguard/gameplay.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <section class="detail-section">
+            <h2>What's in the build</h2>
+            <ul class="feature-list">
+                <li><strong>Hangar and loadout</strong> — the ship, its weapons and the difficulty are chosen before launch, not during it. Easy, Normal or Hard, decided in the config panel.</li>
+                <li><strong>Three weapons with different jobs</strong> — <em>Laser</em> for precision, <em>Plasma</em> for heavy burst, <em>Spread</em> for a wide sweep. Each carries its own ammo count in the HUD.</li>
+                <li><strong>Shields and hull, tracked separately</strong> — the status column shows both, so a hit reads as a number rather than a flash.</li>
+                <li><strong>Bombs and overdrive</strong> — a limited bomb stock, and a combat overdrive state that changes how the HUD reads while it lasts.</li>
+                <li><strong>Bosses with a health bar</strong> — the interception is the point: a named boss, its own bar across the top of the screen, and a percentage that only goes one way.</li>
+                <li><strong>A pilot and an economy</strong> — rank, credits and traders sit around the combat, with milestones and rankings tracked from the same menu.</li>
+                <li><strong>Achievements</strong> — combat milestones are counted (9 of 18 in the capture) and surfaced on the title screen rather than buried.</li>
+                <li><strong>Accessibility settings</strong> — a high-contrast mode and a game-speed multiplier, both in the settings panel.</li>
+            </ul>
+        </section>
+
+        <section class="detail-section">
+            <h2>Gallery</h2>
+            <div class="strips">
+                <figure class="shot">
+                    <img src="../assets/vanguard/shot-01.webp" alt="Title screen with the main menu and system display config panel" loading="lazy">
+                    <figcaption>The shell — main menu on the left, live system config on the right</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/vanguard/shot-02.webp" alt="Hangar and mission config panel with difficulty and weapon arsenal" loading="lazy">
+                    <figcaption>Hangar &amp; mission config — difficulty, and the three-weapon arsenal</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/vanguard/shot-03.webp" alt="In-game HUD over a starfield with asteroids and enemy fire" loading="lazy">
+                    <figcaption>In the fight — ship status, weapons and score down the edges of the frame</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/vanguard/shot-04.webp" alt="Boss encounter with a boss health bar across the top of the screen" loading="lazy">
+                    <figcaption>The interception — a named boss, its own health bar, and rock in the way</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>Under the hood</h2>
+            <ul class="tags">
+                <li>Real-time 3D</li>
+                <li>GLB / glTF</li>
+                <li>WebGL</li>
+                <li>Browser build</li>
+                <li>Game HUD &amp; UI</li>
+                <li>Boss encounters</li>
+            </ul>
+        </section>
+
+        <section class="detail-section">
+            <h2>At a glance</h2>
+            <table class="spec-table">
+                <tr><th>Type</th><td>3D space combat with tactical boss interception</td></tr>
+                <tr><th>Platform</th><td>Browser — desktop-first build</td></tr>
+                <tr><th>Assets</th><td>GLB models for ship, enemies, boss and pickups</td></tr>
+                <tr><th>Loadout</th><td>Laser, plasma, spread — plus bombs and overdrive</td></tr>
+                <tr><th>Meta</th><td>Pilot rank, credits, traders, achievements, rankings</td></tr>
+                <tr><th>Settings</th><td>Difficulty, game-speed multiplier, high-contrast mode</td></tr>
+                <tr><th>Status</th><td>Playable build — in development</td></tr>
+            </table>
+        </section>
+
+    </main>
+
+    <footer class="detail-footer">
+        <span>&copy; 2026 MG Ghanbari</span>
+        <a href="../index.html">&larr; Back to portfolio</a>
+    </footer>
+
+
+    <script src="../assets/visit-counter.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Roulette — Decide Dinner in One Spin | MG Ghanbari</title>
+    <meta name="description" content="Recipe Roulette — pick a mood, an energy level, a cuisine, a diet and a time cap, hit SPIN, and get a full recipe card with timings, servings, cost per serving and a video tutorial.">
+    <link rel="stylesheet" href="../detail.css">
+</head>
+<body>
+
+    <header>
+        <a href="../index.html" class="nav-logo">MG Ghanbari</a>
+        <a href="../index.html" class="nav-back">&larr; Back to portfolio</a>
+    </header>
+
+    <main class="detail">
+
+        <div class="detail-hero">
+            <img src="../assets/roulette/hero.webp" alt="Recipe Roulette result card — Spinach and Ricotta Cannelloni with timings, servings and cost">
+        </div>
+
+        <p class="detail-kicker">Apps &amp; Games</p>
+        <h1 class="detail-title">Recipe Roulette</h1>
+        <p class="detail-lede">
+            The problem is never cooking — it is deciding. Five dropdowns: how you feel, how much energy you
+            have, what cuisine, what you can eat, how long you are willing to stand there. Then one gold SPIN
+            button, and a recipe comes back.
+        </p>
+
+        <div class="detail-actions">
+            <a class="btn-primary" href="#demo">Watch it spin &rarr;</a>
+            <a class="btn-ghost" href="../index.html">&larr; All projects</a>
+        </div>
+
+        <section class="detail-section">
+            <h2>Overview</h2>
+            <p>
+                Recipe Roulette is a single dark screen with a serif gold title and five selects. It takes the
+                two things that actually decide dinner — mood and energy — seriously enough to put them first.
+                A comfort-seeking mood at low energy is a different request from an adventurous mood at high
+                energy, and the app treats it that way.
+            </p>
+            <p>
+                What comes back is not a link. It is a full card: a photograph, the dish name, ready-in time,
+                servings, cost per serving, diet and cuisine tags, a favourites button, an embedded video
+                tutorial, a summary and numbered instructions — with a link out to the full recipe underneath.
+            </p>
+        </section>
+
+        <section class="detail-section" id="demo">
+            <h2>The spin</h2>
+            <p>
+                Two minutes, start to finish — the dropdowns, the SPIN, the loading state, and the card that
+                arrives with a video already matched to the dish.
+            </p>
+            <video class="film" controls playsinline preload="metadata" poster="../assets/roulette/poster.webp">
+                <source src="../assets/roulette/gameplay.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <section class="detail-section">
+            <h2>What's in it</h2>
+            <ul class="feature-list">
+                <li><strong>Eight moods</strong> — happy, sad, stressed, relaxed, energetic, tired, adventurous, comfort-seeking. The first question is how the day went, not what is in the fridge.</li>
+                <li><strong>Five energy levels</strong> — from very low to very high, so a ten-minute assembly and a two-hour project are both on the table.</li>
+                <li><strong>A real cuisine list</strong> — American, British, Canadian, Chinese, Dutch, Egyptian, French, Greek, Indian, Irish, Italian, Jamaican, Japanese, Kenyan, Malaysian, Mexican, Moroccan, Polish, Portuguese and more, scrollable, with <em>None</em> at the top for the indecisive.</li>
+                <li><strong>Dietary filters</strong> — halal, vegetarian, vegan, or none.</li>
+                <li><strong>A time cap</strong> — any, or 30 minutes and up.</li>
+                <li><strong>A loading state that tells the truth</strong> — SPINNING, then a skeleton card, then the result. No fake instant answer.</li>
+                <li><strong>Cost per serving</strong> — every card carries an estimate next to the timings, which is the number people actually argue about.</li>
+                <li><strong>A video tutorial on every recipe</strong> — embedded and playable in the card, with a direct YouTube link when the embed is blocked.</li>
+                <li><strong>Favourites</strong> — one button to keep a result before it disappears back into the roulette.</li>
+            </ul>
+        </section>
+
+        <section class="detail-section">
+            <h2>Gallery</h2>
+            <div class="strips">
+                <figure class="shot">
+                    <img src="../assets/roulette/shot-01.webp" alt="Recipe Roulette form with mood, energy, cuisine, dietary and time set" loading="lazy">
+                    <figcaption>The whole input — five questions, one button</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/roulette/shot-02.webp" alt="Cuisine dropdown open showing the list of cuisines" loading="lazy">
+                    <figcaption>The cuisine list, from American to Portuguese</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/roulette/shot-03.webp" alt="Spinning state with a loading skeleton recipe card" loading="lazy">
+                    <figcaption>SPINNING — the skeleton card holds the layout before the result lands</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/roulette/shot-04.webp" alt="General Tso's Chicken result card with video tutorial" loading="lazy">
+                    <figcaption>A result — Chinese, 55 minutes, $12.48 a serving</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/roulette/shot-05.webp" alt="Embedded YouTube tutorial playing inside the recipe card" loading="lazy">
+                    <figcaption>The tutorial plays inside the card, not in a new tab</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>Under the hood</h2>
+            <ul class="tags">
+                <li>Web app</li>
+                <li>Single-page UI</li>
+                <li>YouTube embeds</li>
+                <li>Filter logic</li>
+                <li>Cost estimation</li>
+                <li>Favourites</li>
+            </ul>
+        </section>
+
+        <section class="detail-section">
+            <h2>At a glance</h2>
+            <table class="spec-table">
+                <tr><th>Type</th><td>Recipe decision app</td></tr>
+                <tr><th>Platform</th><td>Browser — desktop layout</td></tr>
+                <tr><th>Input</th><td>Mood, energy, cuisine, diet, max cooking time</td></tr>
+                <tr><th>Output</th><td>Recipe card — photo, timings, servings, cost, tags, instructions</td></tr>
+                <tr><th>Video</th><td>Embedded tutorial per recipe, with a YouTube fallback link</td></tr>
+                <tr><th>Look</th><td>Near-black, gold serif, one accent</td></tr>
+                <tr><th>Status</th><td>Working build</td></tr>
+            </table>
+        </section>
+
+    </main>
+
+    <footer class="detail-footer">
+        <span>&copy; 2026 MG Ghanbari</span>
+        <a href="../index.html">&larr; Back to portfolio</a>
+    </footer>
+
+
+    <script src="../assets/visit-counter.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+{
+  "_note": "Editable site config. MGBrain reads this when planning a website task. Change a handle here instead of editing code.",
+  "email": "massimojaver@gmail.com",
+  "links": [
+    {
+      "label": "Behance",
+      "url": "https://www.behance.net/massimojaver_xartist"
+    },
+    {
+      "label": "ArtStation",
+      "url": "https://www.artstation.com/massimo83"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/massimo-javer-277a16326/"
+    },
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/xartist166/"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Precision Strike: The Silent Sniper",
+      "url": "https://www.behance.net/gallery/238161433/Precision-Strike-The-Silent-Sniper",
+      "image": "assets/behance-238161433.png"
+    },
+    {
+      "title": "Character Animation Showreel",
+      "url": "https://www.behance.net/gallery/236921349/Character-Animation-Showreel-by-X-Artist",
+      "image": "assets/behance-236921349.jpg"
+    },
+    {
+      "title": "Marvelous Designer Showreel",
+      "url": "https://www.behance.net/gallery/219293123/Marvelous-Designer-Showreel",
+      "image": "assets/behance-219293123.jpg"
+    },
+    {
+      "title": "Unreal Engine: Interactive Modern Villa Exploration",
+      "url": "https://www.behance.net/gallery/222475261/Unreal-Engine-Interactive-Modern-Villa-Exploration",
+      "image": "assets/behance-222475261.png"
+    },
+    {
+      "title": "Molten Flow: A Liquid Simulation Study",
+      "url": "https://www.behance.net/gallery/233557009/Molten-Flow-A-Liquid-Simulation-Study",
+      "image": "assets/behance-233557009.png"
+    },
+    {
+      "title": "Visual Alchemy: Transforming Concepts into 3D Reality",
+      "url": "https://www.behance.net/gallery/214947411/Visual-Alchemy-Transforming-Concepts-into-3D-Reality",
+      "image": "assets/behance-214947411.jpg"
+    },
+    {
+      "title": "Statue Street Fight",
+      "url": "https://www.behance.net/gallery/200132291/Statue-Street-Fight",
+      "image": "assets/behance-200132291.png"
+    },
+    {
+      "title": "Zbrush Sculpt - Angry Dude",
+      "url": "https://www.behance.net/gallery/199286495/Zbrush-Sculpt-Angry-Dude",
+      "image": "assets/behance-199286495.jpg"
+    },
+    {
+      "title": "Unreal Engine: Cinematic Short Film- A History Rendered",
+      "url": "https://www.behance.net/gallery/222473383/Unreal-Engine-Cinematic-Short-Film-A-History-Rendered",
+      "image": "assets/behance-222473383.jpg"
+    },
+    {
+      "title": "Arcane Like - Break the Unknown",
+      "url": "https://www.behance.net/gallery/197078407/Arcane-Like-Break-the-Unknown",
+      "image": "assets/behance-197078407.jpg"
+    },
+    {
+      "title": "Showreel & VFX Breakdown",
+      "url": "https://www.behance.net/gallery/197062817/Showreel-VFX-Breakdown-By-X-Artist",
+      "image": "assets/behance-197062817.jpg"
+    }
+  ]
+}

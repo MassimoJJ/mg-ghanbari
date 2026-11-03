@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Traffic — MG Ghanbari</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #121212;
+            --line: #232323;
+            --text: #e6e6e6;
+            --muted: #7c7c7c;
+            --gold: #e6b45c;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            padding: 56px 24px 80px;
+        }
+        .wrap { max-width: 880px; margin: 0 auto; }
+        .top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+        .kicker {
+            font-size: 0.7rem;
+            letter-spacing: 2.6px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        h1 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            letter-spacing: -0.8px;
+            margin-top: 10px;
+        }
+        .back {
+            font-size: 0.85rem;
+            color: var(--muted);
+            text-decoration: none;
+            border: 1px solid var(--line);
+            border-radius: 50px;
+            padding: 8px 18px;
+        }
+        .back:hover { color: var(--text); border-color: #3a3a3a; }
+
+        .cards {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 22px 24px;
+        }
+        .card .label {
+            font-size: 0.66rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+        .big {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            color: var(--gold);
+            font-variant-numeric: tabular-nums;
+            line-height: 1;
+        }
+        .small {
+            font-size: 1.4rem;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 24px;
+        }
+        .panel h2 {
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 600;
+            margin-bottom: 22px;
+        }
+
+        .chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 160px;
+            padding-bottom: 26px;
+            position: relative;
+        }
+        .bar-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            height: 100%;
+            position: relative;
+        }
+        .bar {
+            width: 100%;
+            max-width: 34px;
+            background: linear-gradient(180deg, #e6b45c, #8a6a2f);
+            border-radius: 4px 4px 0 0;
+            min-height: 3px;
+            transition: height 0.5s ease;
+        }
+        .bar.zero { background: #2a2a2a; }
+        .bar-val {
+            position: absolute;
+            top: -20px;
+            font-size: 0.68rem;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+        }
+        .bar-day {
+            position: absolute;
+            bottom: 0;
+            font-size: 0.6rem;
+            letter-spacing: 0.4px;
+            color: #5a5a5a;
+            white-space: nowrap;
+        }
+
+        .note {
+            margin-top: 26px;
+            font-size: 0.8rem;
+            color: #6a6a6a;
+            line-height: 1.7;
+        }
+        .note strong { color: #9a9a9a; font-weight: 600; }
+        .err { color: #d98a8a; font-size: 0.85rem; }
+
+        @media (max-width: 640px) {
+            .cards { grid-template-columns: 1fr; }
+            .chart { gap: 4px; height: 130px; }
+            .bar-day { font-size: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+
+        <div class="top">
+            <div>
+                <p class="kicker">Private</p>
+                <h1>Site traffic</h1>
+            </div>
+            <a class="back" href="index.html">&larr; Back to the site</a>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <p class="label">Total visits</p>
+                <p class="big" id="total">&mdash;</p>
+            </div>
+            <div class="card">
+                <p class="label">Today (UTC)</p>
+                <p class="small" id="today">&mdash;</p>
+            </div>
+            <div class="card">
+                <p class="label">Last 14 days</p>
+                <p class="small" id="fortnight">&mdash;</p>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Daily visits — last 14 days</h2>
+            <div class="chart" id="chart"></div>
+            <p class="note" id="note">
+                One hit per browsing session — ten pages in one visit counts once. Nothing personal is
+                recorded: no cookies, no IP addresses, no identifiers, no per-page breakdown.
+                <br><br>
+                <strong>This page is not linked from the site and is excluded from search engines.</strong>
+                Anyone who has the exact URL can open it, so treat the address itself as the key.
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        (function () {
+            var SERVICE = 'https://abacus.jasoncameron.dev';
+            var NS = 'mgghanbari-portfolio';
+
+            function get(key) {
+                return fetch(SERVICE + '/get/' + NS + '/' + key, { cache: 'no-store' })
+                    .then(function (r) { return r.ok ? r.json() : null; })
+                    .then(function (d) { return d && typeof d.value === 'number' ? d.value : null; })
+                    .catch(function () { return null; });
+            }
+
+            function isoDay(offset) {
+                var d = new Date();
+                d.setUTCDate(d.getUTCDate() - offset);
+                return d.toISOString().slice(0, 10);
+            }
+
+            var days = [];
+            for (var i = 13; i >= 0; i--) days.push(isoDay(i));
+
+            Promise.all([get('visits')].concat(days.map(function (d) { return get('d-' + d); })))
+                .then(function (res) {
+                    var total = res[0];
+                    var series = res.slice(1);
+
+                    if (total === null && series.every(function (v) { return v === null; })) {
+                        document.getElementById('note').innerHTML =
+                            '<span class="err">Could not reach the counter service. It may be down or blocked by the network.</span>';
+                        return;
+                    }
+
+                    document.getElementById('total').textContent = total === null ? '—' : total.toLocaleString();
+                    document.getElementById('today').textContent = (series[13] || 0).toLocaleString();
+                    document.getElementById('fortnight').textContent =
+                        series.reduce(function (a, b) { return a + (b || 0); }, 0).toLocaleString();
+
+                    var max = Math.max.apply(null, series.concat([1]));
+                    var chart = document.getElementById('chart');
+                    chart.innerHTML = '';
+                    series.forEach(function (v, idx) {
+                        var val = v || 0;
+                        var col = document.createElement('div');
+                        col.className = 'bar-col';
+
+                        var bar = document.createElement('div');
+                        bar.className = 'bar' + (val === 0 ? ' zero' : '');
+                        bar.style.height = Math.max(3, Math.round(val / max * 128)) + 'px';
+
+                        var num = document.createElement('span');
+                        num.className = 'bar-val';
+                        num.textContent = val ? val : '';
+
+                        var lbl = document.createElement('span');
+                        lbl.className = 'bar-day';
+                        lbl.textContent = days[idx].slice(5).replace('-', '/');
+
+                        col.appendChild(num);
+                        col.appendChild(bar);
+                        col.appendChild(lbl);
+                        chart.appendChild(col);
+                    });
+                });
+        })();
+    </script>
+</body>
+</html>

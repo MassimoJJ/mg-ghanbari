@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghan Cinematic — AI Film Studio | MG Ghanbari</title>
+    <meta name="description" content="Ghan Cinematic — an end-to-end AI film pipeline: script to shot breakdown to identity-locked characters to video, routed across local GPU models and cloud APIs.">
+    <link rel="stylesheet" href="../detail.css">
+</head>
+<body>
+
+    <header>
+        <a href="../index.html" class="nav-logo">MG Ghanbari</a>
+        <a href="../index.html" class="nav-back">&larr; Back to portfolio</a>
+    </header>
+
+    <main class="detail">
+
+        <div class="detail-hero">
+            <img src="../assets/ai-ghan-cinematic.png" alt="Ghan Cinematic branded banner">
+        </div>
+
+        <p class="detail-kicker">AI &amp; Automation</p>
+        <h1 class="detail-title">Ghan Cinematic — AI Film Studio</h1>
+        <p class="detail-lede">
+            A production studio that takes a story idea and returns finished shots. You write the script; the
+            system breaks it into shots, locks each character's identity across every frame, and routes each
+            stage to the provider you choose — a local GPU model or a cloud API — refusing to accept a render
+            it cannot verify.
+        </p>
+
+        <div class="detail-actions">
+            <a class="btn-primary" href="#overview">Read the breakdown &rarr;</a>
+            <a class="btn-ghost" href="../index.html">&larr; All projects</a>
+        </div>
+
+        <section class="detail-section" id="overview">
+            <h2>Overview</h2>
+            <p>
+                Most AI video work falls apart on the second shot: the face changes, the lighting resets, the
+                character stops being the same person. Ghan Cinematic is built around fixing that one problem.
+                Character references are generated once, stored, and re-applied to every shot as identity
+                anchors, so a sequence reads as one continuous film instead of a slideshow of near-misses.
+            </p>
+            <p>
+                The second problem is dependency. A studio that only works on your GPU is slow and hardware-bound;
+                one that only works through a single cloud vendor dies the moment that vendor has a bad day.
+                Ghan Cinematic is built as neither. <strong>Every stage has its own provider slot</strong> —
+                script analysis, keyframes and video are routed independently, and any slot can be pointed at a
+                free browser session, a paid API, or a model running on your own machine. You can start a
+                project on a local model, switch the video slot to Veo for the hero shot, and drop back to
+                Qwen for the rest, without changing the workflow around it.
+            </p>
+        </section>
+
+        <section class="detail-section">
+            <h2>Where it runs</h2>
+            <p>
+                Ten providers are registered behind one interface. The choice is per stage and can be
+                overridden per shot.
+            </p>
+            <ul class="feature-list">
+                <li><strong>Local GPU</strong> — ComfyUI running Qwen Image 2.1 on your own card. No key, no credits, no rate limit; one render at a time. Ollama covers local language models for script work.</li>
+                <li><strong>Free browser sessions</strong> — Grok and Google Flow driven through the browser, so no API key is required at all.</li>
+                <li><strong>Paid APIs</strong> — xAI Grok, OpenAI, Google Gemini (including Veo 3.1 video) and Replicate (FLUX, Stable Diffusion 3.5, MiniMax, WAN 2.1).</li>
+                <li><strong>OpenAI-compatible gateways</strong> — KiloCode and OpenCode, for routing text through a single key across many models.</li>
+                <li><strong>Mock</strong> — a zero-credit dry run that exercises the whole pipeline without spending anything.</li>
+            </ul>
+            <p>
+                Model lists are discovered live from each provider's endpoint, with pricing pulled in so the
+                routing dropdowns can mark what is free and what costs money.
+            </p>
+        </section>
+
+        <section class="detail-section">
+            <h2>How the pipeline runs</h2>
+            <ol class="pipeline">
+                <li><strong>Script ingest.</strong> Write or paste the script; the system parses scene intent, tone and continuity requirements.</li>
+                <li><strong>Shot breakdown.</strong> The script is split into ten-second shots, each with framing, camera move and continuity notes.</li>
+                <li><strong>Asset build.</strong> Characters, locations and props are extracted into their own studios, each with a reference sheet.</li>
+                <li><strong>Identity lock.</strong> References are filtered per scene — only the characters actually in a shot are attached, tagged so the model knows which face belongs to which name. Face, hair and accessories are locked; only wardrobe changes.</li>
+                <li><strong>Keyframes.</strong> Each shot's still is generated through the image slot — local Qwen or any cloud image model.</li>
+                <li><strong>Motion.</strong> Each keyframe is animated through the video slot, with a per-shot override when one shot needs a different model.</li>
+                <li><strong>Compile.</strong> ffmpeg stitches the shots in timeline order and mixes the selected score under them.</li>
+            </ol>
+        </section>
+
+        <section class="detail-section">
+            <h2>Guard rails</h2>
+            <p>
+                Browser automation is fragile by nature: a failed capture can save a screenshot of the UI
+                instead of the generated frame, and the pipeline would happily animate it. Every asset is
+                therefore validated before it is accepted — real image magic bytes, a minimum long edge and a
+                minimum file size. A thumbnail or a cropped screenshot of the page is rejected and the shot is
+                retried rather than passed downstream.
+            </p>
+            <p>
+                Shots fail individually, not as a batch. A bad frame is re-rolled on its own, and the rest of
+                the sequence is left untouched.
+            </p>
+        </section>
+
+        <section class="detail-section">
+            <h2>How it's built</h2>
+            <p>
+                The studio is developed under a review gate that is written into the repository rather than
+                left to discipline. Every change faces four specialist reviewers before delivery — an
+                architecture reviewer, a bug hunter, a product reviewer and a regression-safety reviewer — on
+                top of a typecheck and test gate. A result carrying an unresolved <em>REVISE</em> verdict
+                cannot be presented, and the gate exits non-zero when one is outstanding.
+            </p>
+        </section>
+
+        <section class="detail-section">
+            <h2>What it does well</h2>
+            <ul class="feature-list">
+                <li>Character identity stays stable across an entire sequence, not just a single frame.</li>
+                <li>Ten providers behind one interface — swap the route per stage, or per shot, mid-project.</li>
+                <li>A local escape hatch: when a provider is down or out of credit, ComfyUI and Qwen keep the pipeline moving.</li>
+                <li>Per-shot re-renders, so one bad frame never costs you the whole film.</li>
+                <li>Every captured asset is validated — a screenshot of the UI is caught and retried, not animated.</li>
+                <li>A built-in assistant that performs real actions — changing the image provider or running a step — rather than just describing them.</li>
+                <li>Timeline editor, shot library, credit meter and social caption export in the same tool.</li>
+            </ul>
+        </section>
+
+        <section class="detail-section">
+            <h2>See it in action</h2>
+            <p>One project, start to finish. Click any screenshot to see it full size.</p>
+
+            <div class="walk">
+
+                <div class="walk-step">
+                    <div class="walk-head">
+                        <span class="walk-num">01</span>
+                        <div>
+                            <h3>Start a project</h3>
+                            <p>The whole studio is one page — Story Creator at the top, then characters, locations, props, production notes, generated scenes, the pipeline bar and the final clip. No wizard, nothing hidden behind a next button.</p>
+                        </div>
+                    </div>
+                    <a class="walk-shot" href="../assets/ghan/step-01-start.webp">
+                        <img src="../assets/ghan/step-01-start.webp" alt="Ghan Cinematic start screen with empty story creator and pipeline bar" loading="lazy">
+                    </a>
+                </div>
+
+                <div class="walk-step">
+                    <div class="walk-head">
+                        <span class="walk-num">02</span>
+                        <div>
+                            <h3>Route the providers</h3>
+                            <p>Text, image and video are three separate slots, each with its own provider and model. Any slot can point at Grok in a browser, a cloud API, or a local Ollama model — and the same panel holds the API keys.</p>
+                        </div>
+                    </div>
+                    <a class="walk-shot" href="../assets/ghan/step-02-providers.webp">
+                        <img src="../assets/ghan/step-02-providers.webp" alt="Providers and API keys panel with text, image and video routing" loading="lazy">
+                    </a>
+                </div>
+
+                <div class="walk-step">
+                    <div class="walk-head">
+                        <span class="walk-num">03</span>
+                        <div>
+                            <h3>Set the story and its shape</h3>
+                            <p>Tone, structure and length are constraints, not decoration — they are injected before the model writes a single word. This run: <strong>Nostalgic</strong>, <strong>Contrast / Two Worlds</strong>, 60 seconds, in English.</p>
+                        </div>
+                    </div>
+                    <a class="walk-shot" href="../assets/ghan/step-03-story.webp">
+                        <img src="../assets/ghan/step-03-story.webp" alt="Story Creator with idea, tone, structure and length selected" loading="lazy">
+                    </a>
+                </div>
+
+                <div class="walk-step">
+                    <div class="walk-head">
+                        <span class="walk-num">04</span>
+                        <div>
+                            <h3>Generate the script</h3>
+                            <p>The script lands in Step 0 and stays fully editable. Every beat is written as something the camera can see — no interior monologue, no explaining what a character feels.</p>
+                        </div>
+                    </div>
+                    <a class="walk-shot" href="../assets/ghan/step-04-script.webp">
+                        <img src="../assets/ghan/step-04-script.webp" alt="Generated script in the script source panel" loading="lazy">
+                    </a>
+                </div>
+
+                <div class="walk-step">
+                    <div class="walk-head">
+                        <span class="walk-num">05</span>
+                        <div>
+                            <h3>Extract the cast and the sets</h3>
+                            <p>Characters and locations are pulled out of the script with reusable descriptions. This is the text that becomes the identity reference later, which is why it is editable before anything is rendered.</p>
+                        </div>
+                    </div>
+                    <a class="walk-shot" href="../assets/ghan/step-05-characters.webp">
+                        <img src="../assets/ghan/step-05-characters.webp" alt="Generated character cards and location cards" loading="lazy">
+                    </a>
+                </div>
+
+                <div class="walk-step">
+                    <div class="walk-head">
+                        <span class="walk-num">06</span>
+                        <div>
+                            <h3>Generate the references</h3>
+                            <p>Each character gets a three-view sheet on a neutral background, each location a plate — generated from the descriptions above. These are the files every shot prompt attaches as its identity and set anchors, which is why the same face holds from shot one to shot six.</p>
+                        </div>
+                    </div>
+                    <a class="walk-shot" href="../assets/ghan/step-06-references.webp">
+                        <img src="../assets/ghan/step-06-references.webp" alt="Character cards with three-view reference sheets and location cards with generated plates" loading="lazy">
+                    </a>
+                </div>
+
+                <div class="walk-step">
+                    <div class="walk-head">
+                        <span class="walk-num">07</span>
+                        <div>
+                            <h3>Compose the shot</h3>
+                            <p>Nothing here is left to the prompt to guess. The <strong>location</strong> binds that set's plate, the <strong>character chips</strong> attach only the identity sheets for the people actually in this shot, and the <strong>prop tags</strong> name the objects that must stay consistent. The <strong>shot composer</strong> sets framing, angle, lens, lighting and movement explicitly — then the image prompt is assembled from all of it, and the video prompt is written out in the technical format underneath: subject and action, camera movement, environment FX, style.</p>
+                        </div>
+                    </div>
+                    <a class="walk-shot" href="../assets/ghan/step-07-shot-card.webp">
+                        <img src="../assets/ghan/step-07-shot-card.webp" alt="Expanded shot card showing location, props, shot composer, characters, image prompt and video prompt" loading="lazy">
+                    </a>
+                </div>
+
+                <div class="walk-step">
+                    <div class="walk-head">
+                        <span class="walk-num">08</span>
+                        <div>
+                            <h3>The prompt writes itself</h3>
+                            <p>The composer's choices resolve into a single image prompt — subject, wardrobe, set, lighting, lens — assembled automatically from the location, the character sheets and the prop tags, then left editable. Nothing about the shot stays implicit.</p>
+                        </div>
+                    </div>
+                    <a class="walk-shot" href="../assets/ghan/step-08-prompt.webp">
+                        <img src="../assets/ghan/step-08-prompt.webp" alt="Shot card with the assembled image prompt filled in" loading="lazy">
+                    </a>
+                </div>
+
+                <div class="walk-step">
+                    <div class="walk-head">
+                        <span class="walk-num">09</span>
+                        <div>
+                            <h3>The shot renders</h3>
+                            <p>The keyframe comes back and opens full size in the app. Both characters in the same frame, the SOLD sign in the window, the box marked MARA — BEDROOM — all of it carried in by the references rather than described again.</p>
+                        </div>
+                    </div>
+                    <a class="walk-shot" href="../assets/ghan/step-09-render.webp">
+                        <img src="../assets/ghan/step-09-render.webp" alt="Generated keyframe opened in the app lightbox" loading="lazy">
+                    </a>
+                </div>
+
+                <div class="walk-step">
+                    <div class="walk-head">
+                        <span class="walk-num">10</span>
+                        <div>
+                            <h3>Multi-Shots</h3>
+                            <p>One click returns nine consecutive frames of the same shot as a 3×3 grid — KF1 to KF9, identity held across every panel. Pick any cell and it is re-rendered at full resolution as its own keyframe, so you choose the moment instead of re-prompting for it nine times.</p>
+                        </div>
+                    </div>
+                    <a class="walk-shot" href="../assets/ghan/step-10-multishot.webp">
+                        <img src="../assets/ghan/step-10-multishot.webp" alt="Shot card with the 3x3 storyboard grid showing KF1 to KF9" loading="lazy">
+                    </a>
+                </div>
+
+                <div class="walk-step">
+                    <div class="walk-head">
+                        <span class="walk-num">11</span>
+                        <div>
+                            <h3>Pick a frame, animate it</h3>
+                            <p>The grid is a picker. Choose a cell and it comes back as a full-resolution keyframe, filed under Extracted Shots with the cell number stamped on the thumbnail — then it animates like any other shot. The clip underneath is that panel: six seconds of motion out of one still.</p>
+                        </div>
+                    </div>
+                    <a class="walk-shot" href="../assets/ghan/step-11-extracted.webp">
+                        <img src="../assets/ghan/step-11-extracted.webp" alt="Storyboard grid with one extracted keyframe and its generated video" loading="lazy">
+                    </a>
+                </div>
+
+                <div class="walk-step">
+                    <div class="walk-head">
+                        <span class="walk-num">12</span>
+                        <div>
+                            <h3>Render and compile</h3>
+                            <p>Keyframes go through the image slot, each one animated through the video slot, then ffmpeg stitches the shots in timeline order and mixes the score. Shots fail individually — a bad frame is re-rolled on its own.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>The 60-second cut</h2>
+            <p>
+                Six shots, ten seconds each, animated from their keyframes and stitched in order —
+                the whole piece, generated and assembled by the pipeline.
+            </p>
+            <video class="film" controls playsinline preload="metadata" poster="../assets/ghan/film-poster.jpg">
+                <source src="../assets/ghan/film.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <section class="detail-section">
+            <h2>The six shots</h2>
+            <p>
+                One project, generated end to end — a 60-second piece called <em>The Room We Left</em>, built on
+                Contrast / Two Worlds. Same room, same two people, two time periods. The woman carries the same
+                face through every shot she appears in.
+            </p>
+            <div class="gallery-film">
+                <figure class="shot">
+                    <img src="../assets/ghan/shot-01.webp" alt="Mara in the doorway holding a box marked MARA — BEDROOM" loading="lazy">
+                    <figcaption>01 · The Last Box</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/ghan/shot-02.webp" alt="Her father reading the crossword under a green lamp" loading="lazy">
+                    <figcaption>02 · The Other Layer</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/ghan/shot-03.webp" alt="Mara striking a match at the sideboard, her father behind her" loading="lazy">
+                    <figcaption>03 · The Match</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/ghan/shot-04.webp" alt="Close-up of a match burning down to the fingertips" loading="lazy">
+                    <figcaption>04 · Burn To The Fingertips</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/ghan/shot-05.webp" alt="Mara writing LAST on the packing tape" loading="lazy">
+                    <figcaption>05 · LAST</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/ghan/shot-06.webp" alt="Mara sitting in his chair as the lamp comes on" loading="lazy">
+                    <figcaption>06 · His Chair</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>References &amp; sets</h2>
+            <p>
+                The character sheets and location plates the shots were generated against — three views per
+                character so identity holds from any angle.
+            </p>
+            <div class="gallery-film">
+                <figure class="shot">
+                    <img src="../assets/ghan/char-mara.webp" alt="Mara character reference sheet, three views" loading="lazy">
+                    <figcaption>Mara — identity sheet</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/ghan/char-father.webp" alt="Father character reference sheet, three views" loading="lazy">
+                    <figcaption>Father — identity sheet</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/ghan/loc-room.webp" alt="The emptied front room" loading="lazy">
+                    <figcaption>Room — set reference</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>Under the hood</h2>
+            <ul class="tags">
+                <li>Next.js</li>
+                <li>TypeScript</li>
+                <li>ComfyUI</li>
+                <li>Qwen Image 2.1</li>
+                <li>Ollama</li>
+                <li>xAI Grok</li>
+                <li>Gemini / Veo 3.1</li>
+                <li>OpenAI</li>
+                <li>Replicate</li>
+                <li>ffmpeg</li>
+            </ul>
+        </section>
+
+        <section class="detail-section">
+            <h2>At a glance</h2>
+            <table class="spec-table">
+                <tr><th>Type</th><td>AI film production studio</td></tr>
+                <tr><th>Input</th><td>Script + character, location and prop references</td></tr>
+                <tr><th>Output</th><td>Storyboard, keyframes, per-shot video, compiled film, social captions</td></tr>
+                <tr><th>Routing</th><td>Independent text / image / video slots, overridable per shot</td></tr>
+                <tr><th>Providers</th><td>10 — 1 local, 2 browser, 6 API, 1 mock</td></tr>
+                <tr><th>Runs on</th><td>Local machine — a web interface on port 3010, with optional cloud APIs</td></tr>
+                <tr><th>Status</th><td>Active — in daily use</td></tr>
+            </table>
+        </section>
+
+    </main>
+
+    <footer class="detail-footer">
+        <span>&copy; 2026 MG Ghanbari</span>
+        <a href="../index.html">&larr; Back to portfolio</a>
+    </footer>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot preview">
+        <img src="" alt="">
+    </div>
+
+    <script>
+        (function () {
+            var box = document.getElementById('lightbox');
+            var img = box.querySelector('img');
+
+            document.querySelectorAll('.walk-shot').forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    img.src = link.getAttribute('href');
+                    img.alt = link.querySelector('img').alt || '';
+                    box.classList.add('open');
+                });
+            });
+
+            function close() {
+                box.classList.remove('open');
+                img.src = '';
+            }
+
+            box.addEventListener('click', close);
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') close();
+            });
+        })();
+    </script>
+
+
+    <script src="../assets/visit-counter.js" defer></script>
+</body>
+</html>

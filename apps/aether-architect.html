@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Architect — Unreal Engine Mobile Game | MG Ghanbari</title>
+    <meta name="description" content="Aether Architect — a third-person adventure for Android built in Unreal Engine 5.8: floating islands, crystals that open the way, and a motion-matching locomotion stack.">
+    <link rel="stylesheet" href="../detail.css">
+    <style>
+        .thumb-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+        .thumb-grid img { width:100%; aspect-ratio:16/10; object-fit:cover; display:block;
+                          border-radius:6px; background:#111; }
+        @media (max-width:760px) { .thumb-grid { grid-template-columns:repeat(2,1fr); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../index.html" class="nav-logo">MG Ghanbari</a>
+        <a href="../index.html" class="nav-back">&larr; Back to portfolio</a>
+    </header>
+
+    <main class="detail">
+
+        <div class="detail-hero">
+            <img src="../assets/aether/aether-hero.webp" alt="Aether Architect — the player on the path, the stone gate ahead">
+        </div>
+
+        <p class="detail-kicker">Apps &amp; Games</p>
+        <h1 class="detail-title">Aether Architect</h1>
+        <p class="detail-lede">
+            A third-person adventure for Android, built in Unreal Engine 5.8. You cross a scatter of floating
+            islands collecting purple crystals, and the crystals open the way — a stone ring at the centre of the
+            map that is not there yet when you arrive.
+        </p>
+
+        <div class="detail-actions">
+            <a class="btn-primary" href="#gameplay">Watch the capture &rarr;</a>
+            <a class="btn-ghost" href="../index.html">&larr; All projects</a>
+        </div>
+
+        <section class="detail-section">
+            <h2>Overview</h2>
+            <p>
+                Aether Architect is the project I learned Unreal on. It is a first mobile game rather than a
+                finished product — the build is playable, the world is real, and the systems underneath are the
+                point. Everything in it is assembled in-engine: the islands, the crystal pickups, the gate, the
+                HUD and the character locomotion.
+            </p>
+            <p>
+                The design rests on one loop. Crystals are scattered across islands you cannot walk between, so
+                each pickup has to be visible from a distance and reachable by a route you can read. The gate at
+                the centre stays inert until enough of them are collected — which is why the HUD counts crystals
+                separately from health, and why the two item bars sit next to it.
+            </p>
+        </section>
+
+        <section class="detail-section" id="intro">
+            <h2>Intro cinematic</h2>
+            <p>
+                The opening of the game — the title sequence that runs before the first level loads.
+            </p>
+            <video class="film" controls playsinline preload="metadata" poster="../assets/aether/intro-poster.webp">
+                <source src="../assets/aether/intro.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <section class="detail-section" id="gameplay">
+            <h2>Gameplay capture</h2>
+            <p>
+                Recorded straight out of the editor viewport, so what you see is the running game — no trailer
+                edit, no capture rig.
+            </p>
+            <video class="film" controls playsinline preload="metadata" poster="../assets/aether/aether-poster.webp">
+                <source src="../assets/aether/aether.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <section class="detail-section" id="animation">
+            <h2>Animation process</h2>
+            <p>
+                The player character's animation work, sped up 4× — posing, the sequencer passes and the
+                iteration, without the real-time waiting.
+            </p>
+            <video class="film" controls playsinline preload="metadata" poster="../assets/aether/anim-process-poster.webp">
+                <source src="../assets/aether/anim-process.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <section class="detail-section">
+            <h2>What's in the build</h2>
+            <ul class="feature-list">
+                <li><strong>Two levels</strong> — <em>Lvl_Intro</em> for the opening beat and <em>Lvl_Game</em> as the playable island field, set as the default map.</li>
+                <li><strong>A crystal system</strong> — its own meshes, materials, particles and blueprint, so a pickup is one asset rather than a hand-placed prop.</li>
+                <li><strong>Motion matching locomotion</strong> — PoseSearch, MotionTrajectory, Chooser and the Animation Locomotion Library drive the character instead of a hand-built blend tree.</li>
+                <li><strong>Motion warping</strong> — traversal actions snap to their targets instead of sliding through them.</li>
+                <li><strong>LiveLink Control Rig</strong> — the rig is set up for live capture, which is how the character animation was authored.</li>
+                <li><strong>Gameplay StateTree</strong> — behaviour is written as state trees rather than a tangle of blueprint branches.</li>
+                <li><strong>Android target</strong> — the only platform in the project file, with a packaged build under <code>Build/</code>.</li>
+            </ul>
+        </section>
+
+        <section class="detail-section">
+            <h2>Gallery</h2>
+            <div class="gallery-film">
+                <figure class="shot">
+                    <img src="../assets/aether/aether-01.webp" alt="Close portrait of the player character" loading="lazy">
+                    <figcaption>The opening beat — a face before the world</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/aether/aether-02.webp" alt="The character facing the crystal gate on a hill" loading="lazy">
+                    <figcaption>The gate — inert until the crystals are counted</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/aether/aether-03.webp" alt="The character walking the path toward the gate" loading="lazy">
+                    <figcaption>The path out — islands you cannot walk between</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/aether/aether-04.webp" alt="A floating shard of rock with purple crystals" loading="lazy">
+                    <figcaption>The floating shard — where the purple crystals grow</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/aether/aether-05.webp" alt="The green stone construct on the far island" loading="lazy">
+                    <figcaption>The stone construct anchoring the far side</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>Process frames</h2>
+            <div class="thumb-grid">
+                <img src="../assets/aether/aether-bg-01.webp" alt="Aether Architect — process 1" loading="lazy">
+                <img src="../assets/aether/aether-bg-02.webp" alt="Aether Architect — process 2" loading="lazy">
+                <img src="../assets/aether/aether-bg-03.webp" alt="Aether Architect — process 3" loading="lazy">
+                <img src="../assets/aether/aether-bg-04.webp" alt="Aether Architect — process 4" loading="lazy">
+                <img src="../assets/aether/aether-bg-05.webp" alt="Aether Architect — process 5" loading="lazy">
+                <img src="../assets/aether/aether-bg-06.webp" alt="Aether Architect — process 6" loading="lazy">
+                <img src="../assets/aether/aether-bg-07.webp" alt="Aether Architect — process 7" loading="lazy">
+                <img src="../assets/aether/aether-bg-08.webp" alt="Aether Architect — process 8" loading="lazy">
+                <img src="../assets/aether/aether-bg-09.webp" alt="Aether Architect — process 9" loading="lazy">
+                <img src="../assets/aether/aether-bg-10.webp" alt="Aether Architect — process 10" loading="lazy">
+                <img src="../assets/aether/aether-bg-11.webp" alt="Aether Architect — process 11" loading="lazy">
+                <img src="../assets/aether/aether-bg-12.webp" alt="Aether Architect — process 12" loading="lazy">
+                <img src="../assets/aether/aether-bg-13.webp" alt="Aether Architect — process 13" loading="lazy">
+                <img src="../assets/aether/aether-bg-14.webp" alt="Aether Architect — process 14" loading="lazy">
+                <img src="../assets/aether/aether-bg-15.webp" alt="Aether Architect — process 15" loading="lazy">
+                <img src="../assets/aether/aether-bg-16.webp" alt="Aether Architect — process 16" loading="lazy">
+                <img src="../assets/aether/aether-bg-17.webp" alt="Aether Architect — process 17" loading="lazy">
+                <img src="../assets/aether/aether-bg-18.webp" alt="Aether Architect — process 18" loading="lazy">
+                <img src="../assets/aether/aether-bg-19.webp" alt="Aether Architect — process 19" loading="lazy">
+                <img src="../assets/aether/aether-bg-20.webp" alt="Aether Architect — process 20" loading="lazy">
+                <img src="../assets/aether/aether-bg-21.webp" alt="Aether Architect — process 21" loading="lazy">
+                <img src="../assets/aether/aether-bg-22.webp" alt="Aether Architect — process 22" loading="lazy">
+                <img src="../assets/aether/aether-bg-23.webp" alt="Aether Architect — process 23" loading="lazy">
+                <img src="../assets/aether/aether-bg-24.webp" alt="Aether Architect — process 24" loading="lazy">
+                <img src="../assets/aether/aether-bg-25.webp" alt="Aether Architect — process 25" loading="lazy">
+                <img src="../assets/aether/aether-bg-26.webp" alt="Aether Architect — process 26" loading="lazy">
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>Under the hood</h2>
+            <ul class="tags">
+                <li>Unreal Engine 5.8</li>
+                <li>Blueprints</li>
+                <li>StateTree</li>
+                <li>Motion Matching</li>
+                <li>Control Rig</li>
+                <li>Android</li>
+                <li>Blender</li>
+                <li>Fab / Quixel</li>
+            </ul>
+        </section>
+
+        <section class="detail-section">
+            <h2>At a glance</h2>
+            <table class="spec-table">
+                <tr><th>Type</th><td>Third-person adventure</td></tr>
+                <tr><th>Engine</th><td>Unreal Engine 5.8</td></tr>
+                <tr><th>Platform</th><td>Android — the only target in the project</td></tr>
+                <tr><th>Loop</th><td>Collect crystals across floating islands, open the gate</td></tr>
+                <tr><th>Locomotion</th><td>Motion matching + motion warping</td></tr>
+                <tr><th>Status</th><td>Playable prototype — in development</td></tr>
+            </table>
+        </section>
+
+    </main>
+
+    <footer class="detail-footer">
+        <span>&copy; 2026 MG Ghanbari</span>
+        <a href="../index.html">&larr; Back to portfolio</a>
+    </footer>
+
+
+    <script src="../assets/visit-counter.js" defer></script>
+</body>
+</html>

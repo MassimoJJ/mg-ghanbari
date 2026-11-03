@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit Defender — Mobile Space Shooter | MG Ghanbari</title>
+    <meta name="description" content="Orbit Defender — a top-down space shooter for Android: three switchable weapons, bombs, power-ups, a boss, and a high score that survives a reload. React + Canvas 2D, packaged with Capacitor.">
+    <link rel="stylesheet" href="../detail.css">
+</head>
+<body>
+
+    <header>
+        <a href="../index.html" class="nav-logo">MG Ghanbari</a>
+        <a href="../index.html" class="nav-back">&larr; Back to portfolio</a>
+    </header>
+
+    <main class="detail">
+
+        <div class="detail-hero">
+            <img src="../assets/shooter/hero.webp" alt="Orbit Defender app icon and gameplay capture">
+        </div>
+
+        <p class="detail-kicker">Apps &amp; Games</p>
+        <h1 class="detail-title">Orbit Defender</h1>
+        <p class="detail-lede">
+            A top-down space shooter for Android. Asteroids, fighters and the occasional boss fall out of a
+            pastel sky while you hold fire, switch weapons and spend bombs. One canvas, one loop — no engine
+            underneath.
+        </p>
+
+        <div class="detail-actions">
+            <a class="btn-primary" href="#gameplay">Watch the capture &rarr;</a>
+            <a class="btn-ghost" href="../index.html">&larr; All projects</a>
+        </div>
+
+        <section class="detail-section">
+            <h2>Overview</h2>
+            <p>
+                Orbit Defender began as a browser prototype and ended up as a signed Android release. The whole
+                game is a single React component driving one Canvas&nbsp;2D context: a fixed update step, a
+                <code>requestAnimationFrame</code> loop, and a state object that holds the player, the enemies,
+                the bullets, the power-ups and the level counter.
+            </p>
+            <p>
+                The design is built to be legible at phone size. Every enemy is a silhouette you can read at a
+                glance — fighters dive, asteroids drift, hazards telegraph before they fire. The HUD keeps the
+                score top-left with the weapon and the bomb stock under it, and leaves the right-hand corner to
+                the thumb: FIRE, BOMB, WPN.
+            </p>
+        </section>
+
+        <section class="detail-section" id="gameplay">
+            <h2>Gameplay capture</h2>
+            <p>
+                Fifty-five seconds of the early levels — the first power-ups, the first weapon switch, and the
+                first time a bomb is worth spending.
+            </p>
+            <video class="film" controls playsinline preload="metadata" poster="../assets/shooter/poster.webp">
+                <source src="../assets/shooter/gameplay-short.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <section class="detail-section" id="full">
+            <h2>Full run</h2>
+            <p>
+                The unedited session, two and a half minutes — level one through to the boss warning at five,
+                including the run that ends on the failure screen.
+            </p>
+            <video class="film" controls playsinline preload="metadata" poster="../assets/shooter/poster.webp">
+                <source src="../assets/shooter/gameplay-full.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <section class="detail-section">
+            <h2>What's in the build</h2>
+            <ul class="feature-list">
+                <li><strong>Three weapons</strong> — scatter for coverage, laser for reach, plasma for weight. Switch mid-fight with WPN; the weapon levels up to 10 as pickups land.</li>
+                <li><strong>Bombs</strong> — a limited stock that clears the screen, worth saving for the moment the sky fills up.</li>
+                <li><strong>Four power-up types</strong> — shield, weapon, extra life and bomb, each with its own pickup sprite.</li>
+                <li><strong>An enemy set with a hierarchy</strong> — drifting asteroids, diving fighters, telegraphed hazards, and a boss that announces itself with a warning banner before it arrives.</li>
+                <li><strong>Levels that escalate</strong> — spawn rates and enemy mix shift as the counter climbs, so the same sky gets meaner.</li>
+                <li><strong>A high score that persists</strong> — written to <code>localStorage</code>, so closing the app does not wipe the best run.</li>
+                <li><strong>Procedural audio</strong> — every shot, hit, pickup and boss impact is synthesised with the Web Audio API. No audio files ship with the game.</li>
+                <li><strong>Touch and keyboard</strong> — thumb buttons on the phone, arrow keys and space on a desktop, plus a pause menu and a high-contrast toggle for readability.</li>
+            </ul>
+        </section>
+
+        <section class="detail-section">
+            <h2>Gallery</h2>
+            <div class="strips">
+                <figure class="shot">
+                    <img src="../assets/shooter/shot-01.webp" alt="Fighters diving toward the player ship" loading="lazy">
+                    <figcaption>Fighters break formation and dive — the first thing that punishes standing still</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/shooter/shot-02.webp" alt="Player ship inside a shield bubble" loading="lazy">
+                    <figcaption>Shield pickup — a bubble with a countdown on it</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/shooter/shot-03.webp" alt="Player firing into a field of asteroids and power-ups" loading="lazy">
+                    <figcaption>Scatter fire into a field of asteroids, with a weapon pickup drifting past</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/shooter/shot-04.webp" alt="Level four, heavy asteroid traffic" loading="lazy">
+                    <figcaption>Level four — the spawn mix turns to rock and the gaps close up</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="../assets/shooter/shot-05.webp" alt="Boss warning banner across the screen" loading="lazy">
+                    <figcaption>“Warning: boss approaching” — the banner that runs before the level-five fight</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>Under the hood</h2>
+            <ul class="tags">
+                <li>React 19</li>
+                <li>TypeScript</li>
+                <li>Canvas 2D</li>
+                <li>Vite</li>
+                <li>Capacitor</li>
+                <li>Web Audio API</li>
+                <li>Android</li>
+            </ul>
+        </section>
+
+        <section class="detail-section">
+            <h2>At a glance</h2>
+            <table class="spec-table">
+                <tr><th>Type</th><td>Top-down space shooter</td></tr>
+                <tr><th>Platform</th><td>Android — signed release build; also runs in the browser</td></tr>
+                <tr><th>Renderer</th><td>Canvas 2D, one <code>requestAnimationFrame</code> loop</td></tr>
+                <tr><th>Input</th><td>Touch buttons, keyboard, pause menu</td></tr>
+                <tr><th>Weapons</th><td>Scatter, laser, plasma — switchable in play</td></tr>
+                <tr><th>Sound</th><td>Web Audio synthesis — no sample files</td></tr>
+                <tr><th>Persistence</th><td>High score in <code>localStorage</code></td></tr>
+                <tr><th>Package</th><td><code>com.epiccells.galacticvanguard</code></td></tr>
+                <tr><th>Status</th><td>Released — signed APK / AAB</td></tr>
+            </table>
+        </section>
+
+    </main>
+
+    <footer class="detail-footer">
+        <span>&copy; 2026 MG Ghanbari</span>
+        <a href="../index.html">&larr; Back to portfolio</a>
+    </footer>
+
+
+    <script src="../assets/visit-counter.js" defer></script>
+</body>
+</html>
