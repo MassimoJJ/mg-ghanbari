@@ -63,33 +63,55 @@ ${pages
 writeFileSync(join(ROOT, "sitemap.xml"), xml);
 console.log(`sitemap.xml written — ${pages.length} urls, lastmod ${lastmod}`);
 
-// ---- IndexNow -------------------------------------------------------------
-const keyFile = readdirSync(ROOT).find((f) => /^[a-f0-9]{32}\.txt$/.test(f));
-if (!keyFile) {
-  console.log("no IndexNow key file found — skipping ping");
+// ---- Bing Webmaster Tools URL submission --------------------------------
+// IndexNow rejects this host (403, unverified key handshake), but the official
+// Bing API accepts submissions once the site is verified — so use that.
+const urls = pages.map((p) => `${BASE}${p}`);
+const bingKey = process.env.BING_API_KEY;
+
+if (!bingKey) {
+  console.log("no BING_API_KEY in this environment — skipping Bing submission");
 } else {
+  try {
+    const res = await fetch(
+      `https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=${bingKey}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        body: JSON.stringify({ siteUrl: BASE + "/", urlList: urls }),
+      }
+    );
+    const text = await res.text();
+    if (res.ok && !/error/i.test(text)) {
+      console.log(`Bing: submitted ${urls.length} urls (${res.status})`);
+    } else {
+      console.log(`Bing submission rejected (${res.status}): ${text.slice(0, 160)}`);
+    }
+  } catch (err) {
+    console.log(`Bing submission failed (non-fatal): ${err.message}`);
+  }
+}
+
+// ---- IndexNow (Bing, Yandex, Seznam, Naver) -----------------------------
+const keyFile = readdirSync(ROOT).find((f) => /^[a-f0-9]{32}\.txt$/.test(f));
+if (keyFile) {
   const key = readFileSync(join(ROOT, keyFile), "utf8").trim();
-  const body = {
-    host: new URL(BASE).host,
-    key,
-    keyLocation: `${BASE}/${keyFile}`,
-    urlList: pages.map((p) => `${BASE}${p}`),
-  };
   try {
     const res = await fetch("https://api.indexnow.org/indexnow", {
       method: "POST",
       headers: { "Content-Type": "application/json; charset=utf-8" },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        host: new URL(BASE).host,
+        key,
+        keyLocation: `${BASE}/${keyFile}`,
+        urlList: urls,
+      }),
     });
     if (res.status === 200 || res.status === 202) {
-      console.log(`IndexNow accepted ${body.urlList.length} urls (${res.status})`);
-    } else if (res.status === 403) {
-      console.log("IndexNow declined (403): the host is not verified with Bing yet. " +
-                  "Harmless — search engines still read sitemap.xml. Verify the site in " +
-                  "Bing Webmaster Tools to enable instant submission.");
-    } else {
-      console.log(`IndexNow ping: ${res.status} ${res.statusText} (${body.urlList.length} urls)`);
+      console.log(`IndexNow accepted ${urls.length} urls (${res.status})`);
     }
+    // 403 here means the key handshake is not trusted yet — the Bing API above
+    // already covers discovery, so this is intentionally quiet.
   } catch (err) {
     console.log(`IndexNow ping failed (non-fatal): ${err.message}`);
   }
