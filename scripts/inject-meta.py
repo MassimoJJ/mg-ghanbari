@@ -34,7 +34,12 @@ def slug_for(page):
 
 
 def url_for(page):
-    return BASE + "/" if page == "index.html" else f"{BASE}/{page}"
+    """Netlify serves pretty URLs (/apps/x), so canonicals must match them."""
+    if page == "index.html":
+        return BASE + "/"
+    if page.endswith("/index.html"):
+        return f"{BASE}/{page[:-len('index.html')]}"
+    return f"{BASE}/{page[:-5]}"
 
 
 def read(page):

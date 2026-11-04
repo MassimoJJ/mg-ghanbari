@@ -36,7 +36,11 @@ function lastCommitDate() {
 
 const pages = walk(ROOT)
   .map((f) => "/" + relative(ROOT, f).split("\\").join("/"))
-  .map((p) => (p === "/index.html" ? "/" : p))
+  .map((p) => {
+    if (p === "/index.html") return "/";
+    if (p.endsWith("/index.html")) return p.slice(0, -"index.html".length);
+    return p.replace(/\.html$/, "");
+  })
   .sort();
 
 const lastmod = lastCommitDate();
@@ -77,7 +81,15 @@ if (!keyFile) {
       headers: { "Content-Type": "application/json; charset=utf-8" },
       body: JSON.stringify(body),
     });
-    console.log(`IndexNow ping: ${res.status} ${res.statusText} (${body.urlList.length} urls)`);
+    if (res.status === 200 || res.status === 202) {
+      console.log(`IndexNow accepted ${body.urlList.length} urls (${res.status})`);
+    } else if (res.status === 403) {
+      console.log("IndexNow declined (403): the host is not verified with Bing yet. " +
+                  "Harmless — search engines still read sitemap.xml. Verify the site in " +
+                  "Bing Webmaster Tools to enable instant submission.");
+    } else {
+      console.log(`IndexNow ping: ${res.status} ${res.statusText} (${body.urlList.length} urls)`);
+    }
   } catch (err) {
     console.log(`IndexNow ping failed (non-fatal): ${err.message}`);
   }
