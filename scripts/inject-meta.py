@@ -13,10 +13,13 @@ import html
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://mg-ghanbari.netlify.app"
 
+SKIP_DIRS = {"assets", "scripts", "node_modules", ".git", ".netlify"}
 PAGES = ["index.html"]
-for d in ("apps", "ai"):
+for d in sorted(os.listdir(ROOT)):
+    if d in SKIP_DIRS or not os.path.isdir(os.path.join(ROOT, d)):
+        continue
     for f in sorted(os.listdir(os.path.join(ROOT, d))):
-        if f.endswith(".html"):
+        if f.endswith(".html") and f != "404.html":
             PAGES.append(f"{d}/{f}")
 
 HOME_DESC = ("Portfolio of MG Ghanbari — 3D and VFX artist and developer. Character and creature "

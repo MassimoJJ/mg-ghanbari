@@ -16,10 +16,13 @@ W, H = 1200, 630
 FONT_BOLD = r"C:\Windows\Fonts\arialbd.ttf"
 FONT_REG = r"C:\Windows\Fonts\arial.ttf"
 
+SKIP_DIRS = {"assets", "scripts", "node_modules", ".git", ".netlify"}
 PAGES = ["index.html"]
-for d in ("apps", "ai"):
+for d in sorted(os.listdir(ROOT)):
+    if d in SKIP_DIRS or not os.path.isdir(os.path.join(ROOT, d)):
+        continue
     for f in sorted(os.listdir(os.path.join(ROOT, d))):
-        if f.endswith(".html"):
+        if f.endswith(".html") and f != "404.html":
             PAGES.append(f"{d}/{f}")
 
 
