@@ -63,6 +63,53 @@ ${pages
 writeFileSync(join(ROOT, "sitemap.xml"), xml);
 console.log(`sitemap.xml written — ${pages.length} urls, lastmod ${lastmod}`);
 
+// ---- RSS feed for the Notes section --------------------------------------
+// Same convention as the Bing/IndexNow blocks: a feed failure is logged and
+// never fails the deploy. Items are the notes/*.html pages (the hub index is
+// the channel, not an item), dated from each file's last git commit.
+try {
+  const notesDir = join(ROOT, "notes");
+  if (existsSync(notesDir)) {
+    const esc = (s) =>
+      String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    const notes = readdirSync(notesDir).filter((n) => n.endsWith(".html") && n !== "index.html").sort();
+    const items = notes.map((n) => {
+      const rel = "notes/" + n;
+      const html = readFileSync(join(notesDir, n), "utf8");
+      const title = ((html.match(/<title[^>]*>([\s\S]*?)<\/title>/i) || [])[1] || n).trim();
+      let when;
+      try {
+        const iso = execSync(`git log -1 --format=%cI -- "${rel}"`, { encoding: "utf8" }).trim();
+        const d = new Date(iso);
+        when = Number.isNaN(d.getTime()) ? new Date() : d;
+      } catch {
+        when = new Date();
+      }
+      const link = `${BASE}/notes/${n.replace(/\.html$/, "")}`;
+      return `    <item>
+      <title>${esc(title)}</title>
+      <link>${link}</link>
+      <guid isPermaLink="true">${link}</guid>
+      <pubDate>${when.toUTCString()}</pubDate>
+    </item>`;
+    });
+    const feed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>MG Ghanbari — Notes</title>
+    <link>${BASE}/notes/</link>
+    <description>Technical notes written while building: animation, web 3D, game loops and AI interfaces.</description>
+${items.join("\n")}
+  </channel>
+</rss>
+`;
+    writeFileSync(join(ROOT, "feed.xml"), feed);
+    console.log(`feed.xml written — ${items.length} notes`);
+  }
+} catch (err) {
+  console.log(`feed.xml failed (non-fatal): ${err.message}`);
+}
+
 // ---- Bing Webmaster Tools URL submission --------------------------------
 // IndexNow rejects this host (403), but the official Bing API accepts
 // submissions once the site is verified. A new site only gets a small daily
