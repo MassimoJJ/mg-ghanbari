@@ -5,3 +5,6 @@
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# WorkBuddy runtime state (automation memory) — never part of the site
+.workbuddy-ai/
