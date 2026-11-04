@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Note: /stats.html is deliberately NOT listed here. It carries a noindex tag,
+# and naming it in robots.txt would only advertise the URL — robots.txt is public.
+# Disallowing it would also stop crawlers reading the noindex tag, which is worse.
+
+Sitemap: https://mg-ghanbari.netlify.app/sitemap.xml
