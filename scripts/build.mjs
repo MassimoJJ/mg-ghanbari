@@ -64,26 +64,61 @@ writeFileSync(join(ROOT, "sitemap.xml"), xml);
 console.log(`sitemap.xml written — ${pages.length} urls, lastmod ${lastmod}`);
 
 // ---- Bing Webmaster Tools URL submission --------------------------------
-// IndexNow rejects this host (403, unverified key handshake), but the official
-// Bing API accepts submissions once the site is verified — so use that.
-const urls = pages.map((p) => `${BASE}${p}`);
+// IndexNow rejects this host (403), but the official Bing API accepts
+// submissions once the site is verified. A new site only gets a small daily
+// quota (~10), so submit only the pages this commit actually changed rather
+// than all of them — the sitemap already covers full discovery.
+function changedUrls() {
+  try {
+    const out = execSync("git diff --name-only HEAD~1 HEAD", { encoding: "utf8" });
+    const urls = out
+      .split("\n")
+      .map((f) => f.trim())
+      .filter((f) => f.endsWith(".html") && !SKIP.has(f.split("/").pop()))
+      .map((f) => {
+        if (f === "index.html") return BASE + "/";
+        if (f.endsWith("/index.html")) return BASE + "/" + f.slice(0, -"index.html".length);
+        return BASE + "/" + f.replace(/\.html$/, "");
+      });
+    return [...new Set(urls)];
+  } catch {
+    return [];
+  }
+}
+
+const changed = changedUrls();
 const bingKey = process.env.BING_API_KEY;
 
 if (!bingKey) {
   console.log("no BING_API_KEY in this environment — skipping Bing submission");
+} else if (!changed.length) {
+  console.log("Bing: no page changes in this commit — nothing to submit");
 } else {
   try {
+    // Ask Bing how much quota is left — a new site gets ~10 URLs a day, and
+    // exceeding it fails the whole batch rather than trimming it.
+    const qRes = await fetch(
+      `https://ssl.bing.com/webmaster/api.svc/json/GetUrlSubmissionQuota` +
+      `?apikey=${bingKey}&siteUrl=${encodeURIComponent(BASE + "/")}`
+    );
+    const quota = qRes.ok ? (await qRes.json())?.d?.DailyQuota : null;
+    const allowance = Math.min(changed.length, 10, quota === null ? 10 : quota);
+    if (allowance <= 0) {
+      console.log(`Bing: daily quota exhausted (${quota} left) — sitemap still covers it`);
+      process.exit(0);
+    }
     const res = await fetch(
       `https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=${bingKey}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json; charset=utf-8" },
-        body: JSON.stringify({ siteUrl: BASE + "/", urlList: urls }),
+        body: JSON.stringify({ siteUrl: BASE + "/", urlList: changed.slice(0, allowance) }),
       }
     );
     const text = await res.text();
     if (res.ok && !/error/i.test(text)) {
-      console.log(`Bing: submitted ${urls.length} urls (${res.status})`);
+      console.log(`Bing: submitted ${allowance} of ${changed.length} changed url(s)`);
+      for (const u of changed.slice(0, allowance)) console.log(`  ${u}`);
     } else {
       console.log(`Bing submission rejected (${res.status}): ${text.slice(0, 160)}`);
     }
@@ -104,11 +139,11 @@ if (keyFile) {
         host: new URL(BASE).host,
         key,
         keyLocation: `${BASE}/${keyFile}`,
-        urlList: urls,
+        urlList: pages.map((p) => `${BASE}${p}`),
       }),
     });
     if (res.status === 200 || res.status === 202) {
-      console.log(`IndexNow accepted ${urls.length} urls (${res.status})`);
+      console.log(`IndexNow accepted ${pages.length} urls (${res.status})`);
     }
     // 403 here means the key handshake is not trusted yet — the Bing API above
     // already covers discovery, so this is intentionally quiet.
