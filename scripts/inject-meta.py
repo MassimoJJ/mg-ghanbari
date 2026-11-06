@@ -80,6 +80,7 @@ def build_block(page):
             "https://www.artstation.com/massimo83",
             "https://www.linkedin.com/in/massimo-javer-277a16326/",
             "https://www.instagram.com/xartist166/",
+            "https://www.instagram.com/kham_comedy/reels/",
             "https://github.com/MassimoJJ",
         ],
     }
