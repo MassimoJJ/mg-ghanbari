@@ -8,11 +8,20 @@
   command = "node scripts/build.mjs"
   publish = "."
 
-# Serve the custom 404 for any unknown path.
+# Serve the custom 404 for any unknown path. The old campaign left hundreds of
+# placeholder links to https://example.com/ in the 404 page; those are
+# low-quality, off-topic backlinks, so this page is served without them.
 [[redirects]]
   from = "/*"
   to = "/404.html"
   status = 404
+
+# Keep the placeholder page out of the index. It exists only to absorb the
+# crawl of a bad URL; it is not content.
+[[headers]]
+  for = "/404.html"
+  [headers.values]
+    X-Robots-Tag = "noindex"
 
 # Assets change when projects are added, so cache for a week rather than a year —
 # a year-long cache would keep showing a replaced image long after it was updated.
