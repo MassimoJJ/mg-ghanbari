@@ -8,3 +8,6 @@ desktop.ini
 
 # Local credentials (Bing API key) — never committed
 .env.local
+
+# Netlify CLI local cache (no longer deployed here)
+.netlify/
