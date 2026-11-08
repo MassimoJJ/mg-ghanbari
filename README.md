@@ -1,4 +1,4 @@
-# mg-ghanbari.netlify.app
+# massimojj.github.io/mg-ghanbari
 
 Portfolio site — 3D & VFX, AI automation, apps and games.
 
@@ -19,22 +19,19 @@ assets/visit-counter.js   one hit per browsing session
 
 ## Deploying
 
-**Live site:** https://mg-ghanbari.netlify.app
-**Netlify project:** https://app.netlify.com/projects/mg-ghanbari
+**Live site:** https://massimojj.github.io/mg-ghanbari
+**Hosted on:** GitHub Pages (free, public repo)
 
-Every push to `main` deploys automatically once the repository is linked in
-Netlify (Site configuration → Build & deploy → Repository).
+Every push to `main` deploys automatically — GitHub Pages builds from the
+`main` branch root. No build command, no credit card, nothing to configure.
 
-Manual deploy, if ever needed:
-
-```bash
-netlify deploy --prod --dir=.
-```
+There is no manual deploy step; just push to `main`.
 
 ## Editing
 
 Open any `.html` file and edit it. There is no build, so what you save is what
-ships. Relative paths only — the site is served from the domain root.
+ships. Relative paths only — the site is served from a subpath (`/mg-ghanbari/`),
+so all links are relative.
 
 When adding a project page:
 
@@ -44,8 +41,11 @@ When adding a project page:
 
 ## Traffic
 
-`stats.html` shows total visits and a 14-day chart. It is excluded from search
-engines and is not linked from any page — the URL is the key.
+`stats.html` shows total visits, a 14-day chart, and a per-page breakdown of the
+most-viewed pages. It is excluded from search engines and is not linked from any
+page — the URL is the key:
+
+    https://massimojj.github.io/mg-ghanbari/stats.html
 
 ## Video
 

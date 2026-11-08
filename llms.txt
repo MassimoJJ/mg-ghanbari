@@ -8,41 +8,41 @@
 
 ## Portfolio — VFX & 3D Art
 
-- [Precision Strike: The Silent Sniper](https://mg-ghanbari.netlify.app/apps/precision-strike): cinematic sniper sequence — layout, lighting and compositing
-- [Character Animation Showreel](https://mg-ghanbari.netlify.app/apps/character-animation-showreel): character animation reel with performance and body mechanics
-- [Marvelous Designer Showreel](https://mg-ghanbari.netlify.app/apps/marvelous-designer): cloth simulation and garment work reel
-- [Unreal Engine: Interactive Modern Villa Exploration](https://mg-ghanbari.netlify.app/apps/modern-villa): real-time architectural walkthrough built in Unreal Engine
-- [Molten Flow: A Liquid Simulation Study](https://mg-ghanbari.netlify.app/apps/molten-flow): liquid and molten material simulation study
-- [Visual Alchemy: Transforming Concepts into 3D Reality](https://mg-ghanbari.netlify.app/apps/visual-alchemy): concept-to-3D production breakdown
-- [Statue Street Fight](https://mg-ghanbari.netlify.app/apps/statue-street-fight): stylised character and action piece
-- [ZBrush Sculpt — Angry Dude](https://mg-ghanbari.netlify.app/apps/zbrush-sculpt): digital sculpture and character bust
-- [Unreal Engine: A History Rendered](https://mg-ghanbari.netlify.app/apps/a-history-rendered): cinematic short film made in Unreal Engine
-- [News Animation](https://mg-ghanbari.netlify.app/apps/news-animation): stylised broadcast characters for animated news segments
-- [Arcane Like — Break the Unknown](https://mg-ghanbari.netlify.app/apps/arcane-like): stylised cinematic in an Arcane-inspired look
+- [Precision Strike: The Silent Sniper](https://massimojj.github.io/mg-ghanbari/apps/precision-strike): cinematic sniper sequence — layout, lighting and compositing
+- [Character Animation Showreel](https://massimojj.github.io/mg-ghanbari/apps/character-animation-showreel): character animation reel with performance and body mechanics
+- [Marvelous Designer Showreel](https://massimojj.github.io/mg-ghanbari/apps/marvelous-designer): cloth simulation and garment work reel
+- [Unreal Engine: Interactive Modern Villa Exploration](https://massimojj.github.io/mg-ghanbari/apps/modern-villa): real-time architectural walkthrough built in Unreal Engine
+- [Molten Flow: A Liquid Simulation Study](https://massimojj.github.io/mg-ghanbari/apps/molten-flow): liquid and molten material simulation study
+- [Visual Alchemy: Transforming Concepts into 3D Reality](https://massimojj.github.io/mg-ghanbari/apps/visual-alchemy): concept-to-3D production breakdown
+- [Statue Street Fight](https://massimojj.github.io/mg-ghanbari/apps/statue-street-fight): stylised character and action piece
+- [ZBrush Sculpt — Angry Dude](https://massimojj.github.io/mg-ghanbari/apps/zbrush-sculpt): digital sculpture and character bust
+- [Unreal Engine: A History Rendered](https://massimojj.github.io/mg-ghanbari/apps/a-history-rendered): cinematic short film made in Unreal Engine
+- [News Animation](https://massimojj.github.io/mg-ghanbari/apps/news-animation): stylised broadcast characters for animated news segments
+- [Arcane Like — Break the Unknown](https://massimojj.github.io/mg-ghanbari/apps/arcane-like): stylised cinematic in an Arcane-inspired look
 
 ## AI & Automation
 
-- [Ghan Cinematic — AI Film Studio](https://mg-ghanbari.netlify.app/ai/ghan-cinematic): end-to-end cinematic pipeline — script to 10s shot breakdown to identity-locked keyframes to video, routed across 10 providers (local Qwen/ComfyUI or cloud Grok, Gemini, OpenAI, Replicate) with per-shot retries
+- [Ghan Cinematic — AI Film Studio](https://massimojj.github.io/mg-ghanbari/ai/ghan-cinematic): end-to-end cinematic pipeline — script to 10s shot breakdown to identity-locked keyframes to video, routed across 10 providers (local Qwen/ComfyUI or cloud Grok, Gemini, OpenAI, Replicate) with per-shot retries
 
 ## Apps & Games
 
-- [Sentinel Vanguard](https://mg-ghanbari.netlify.app/apps/sentinel-vanguard): 3D space combat with hangar loadouts, shields, hull, bombs and boss fights
-- [Aether Architect](https://mg-ghanbari.netlify.app/apps/aether-architect): third-person Unreal Engine 5.8 adventure for Android — floating islands, crystal pickups, motion-matching locomotion
-- [Harmony Heart Pro (NVC Edition)](https://mg-ghanbari.netlify.app/apps/harmony-heart-pro): AI Non-Violent Communication coach for couples, Gemini-driven, five languages, Android
-- [Recipe Roulette](https://mg-ghanbari.netlify.app/apps/recipe-roulette): decide dinner in one spin — mood, energy, cuisine, diet and time cap into a full recipe card
-- [Podcast Discovery Wheel](https://mg-ghanbari.netlify.app/apps/podcast-discovery-wheel): spin a dial to get one podcast episode with an AI summary instead of an endless feed
-- [Orbit Defender](https://mg-ghanbari.netlify.app/apps/orbit-defender): top-down space shooter for Android — scatter, laser and plasma weapons, shields, boss encounters
+- [Sentinel Vanguard](https://massimojj.github.io/mg-ghanbari/apps/sentinel-vanguard): 3D space combat with hangar loadouts, shields, hull, bombs and boss fights
+- [Aether Architect](https://massimojj.github.io/mg-ghanbari/apps/aether-architect): third-person Unreal Engine 5.8 adventure for Android — floating islands, crystal pickups, motion-matching locomotion
+- [Harmony Heart Pro (NVC Edition)](https://massimojj.github.io/mg-ghanbari/apps/harmony-heart-pro): AI Non-Violent Communication coach for couples, Gemini-driven, five languages, Android
+- [Recipe Roulette](https://massimojj.github.io/mg-ghanbari/apps/recipe-roulette): decide dinner in one spin — mood, energy, cuisine, diet and time cap into a full recipe card
+- [Podcast Discovery Wheel](https://massimojj.github.io/mg-ghanbari/apps/podcast-discovery-wheel): spin a dial to get one podcast episode with an AI summary instead of an endless feed
+- [Orbit Defender](https://massimojj.github.io/mg-ghanbari/apps/orbit-defender): top-down space shooter for Android — scatter, laser and plasma weapons, shields, boss encounters
 
 ## Notes
 
-- [Notes hub](https://mg-ghanbari.netlify.app/notes/): short technical write-ups
-- [Motion matching on mobile](https://mg-ghanbari.netlify.app/notes/motion-matching-mobile)
-- [Canvas game loop in React](https://mg-ghanbari.netlify.app/notes/canvas-game-loop-react)
-- [Cost of 3D in the browser](https://mg-ghanbari.netlify.app/notes/browser-3d-cost)
-- [The AI behind a small UI](https://mg-ghanbari.netlify.app/notes/ai-behind-a-small-ui)
+- [Notes hub](https://massimojj.github.io/mg-ghanbari/notes/): short technical write-ups
+- [Motion matching on mobile](https://massimojj.github.io/mg-ghanbari/notes/motion-matching-mobile)
+- [Canvas game loop in React](https://massimojj.github.io/mg-ghanbari/notes/canvas-game-loop-react)
+- [Cost of 3D in the browser](https://massimojj.github.io/mg-ghanbari/notes/browser-3d-cost)
+- [The AI behind a small UI](https://massimojj.github.io/mg-ghanbari/notes/ai-behind-a-small-ui)
 
 ## Optional
 
-- [Home](https://mg-ghanbari.netlify.app/): full portfolio index, disciplines and contact form
+- [Home](https://massimojj.github.io/mg-ghanbari/): full portfolio index, disciplines and contact form
 - Contact: massimojaver@gmail.com
 - Elsewhere: [Behance](https://www.behance.net/massimojaver_xartist), [ArtStation](https://www.artstation.com/massimo83), [LinkedIn](https://www.linkedin.com/in/massimo-javer-277a16326/), [Instagram](https://www.instagram.com/xartist166/), [Comedy Reels (Instagram)](https://www.instagram.com/kham_comedy/reels/)

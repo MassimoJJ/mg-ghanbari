@@ -10,7 +10,7 @@
  */
 import { readFileSync, existsSync } from "node:fs";
 
-const SITE = "https://mg-ghanbari.netlify.app/";
+const SITE = "https://massimojj.github.io/mg-ghanbari/";
 const API = "https://ssl.bing.com/webmaster/api.svc/json";
 
 function loadKey() {

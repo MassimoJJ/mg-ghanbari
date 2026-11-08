@@ -3,7 +3,7 @@
 Generates the 1200x630 Open Graph share cards in assets/og/.
 
 Run locally after adding or changing a project:  python scripts/make-og.py
-The output is committed, so the Netlify build does not need Python.
+The output is committed, so the GitHub Pages build does not need Python.
 """
 import os
 import re
@@ -16,7 +16,7 @@ W, H = 1200, 630
 FONT_BOLD = r"C:\Windows\Fonts\arialbd.ttf"
 FONT_REG = r"C:\Windows\Fonts\arial.ttf"
 
-SKIP_DIRS = {"assets", "scripts", "node_modules", ".git", ".netlify"}
+SKIP_DIRS = {"assets", "scripts", "node_modules", ".git"}
 PAGES = ["index.html"]
 for d in sorted(os.listdir(ROOT)):
     if d in SKIP_DIRS or not os.path.isdir(os.path.join(ROOT, d)):
@@ -102,7 +102,7 @@ def build(page):
     d.rectangle([66, H - 78, 138, H - 75], fill=(230, 180, 92))
     sub = "3D & VFX  ·  AI AUTOMATION  ·  APPS" if page == "index.html" else "MG GHANBARI"
     d.text((156, H - 86), sub, font=f_kicker, fill=(230, 180, 92))
-    dom = "mg-ghanbari.netlify.app"
+    dom = "massimojj.github.io/mg-ghanbari"
     d.text((W - 66 - d.textlength(dom, font=f_domain), H - 84), dom, font=f_domain, fill=(150, 150, 150))
 
     slug = "home" if page == "index.html" else page.replace("/", "-").replace(".html", "")

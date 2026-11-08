@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * Runs on every Netlify deploy.
+ * Regenerates sitemap.xml and feed.xml from the pages in the repo.
  *
  *  1. regenerates sitemap.xml from the HTML files actually in the repo
  *  2. tells IndexNow (Bing, Yandex, Seznam, Naver) that the URLs exist
  *
- * No dependencies — Netlify's Node image can run this as-is.
+ * No dependencies — runs on Node 18+ as-is (used by the GitHub Pages workflow or locally).
  * Google ignores IndexNow; it discovers the site through the sitemap instead.
  */
 import { readdirSync, statSync, writeFileSync, existsSync, readFileSync } from "node:fs";
@@ -13,7 +13,7 @@ import { join, relative } from "node:path";
 import { execSync } from "node:child_process";
 
 const ROOT = process.cwd();
-const BASE = "https://mg-ghanbari.netlify.app";
+const BASE = "https://massimojj.github.io/mg-ghanbari";
 const SKIP = new Set(["stats.html", "404.html"]);
 
 function walk(dir, out = []) {

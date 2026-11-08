@@ -1,6 +1,3 @@
-# Ignore Netlify's local state folder (contains the site ID and deploy cache)
-.netlify/
-
 # OS junk
 .DS_Store
 Thumbs.db

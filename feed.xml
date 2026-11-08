@@ -2,30 +2,30 @@
 <rss version="2.0">
   <channel>
     <title>MG Ghanbari — Notes</title>
-    <link>https://mg-ghanbari.netlify.app/notes/</link>
+    <link>https://massimojj.github.io/mg-ghanbari/notes/</link>
     <description>Technical notes written while building: animation, web 3D, game loops and AI interfaces.</description>
     <item>
       <title>Putting an AI behind a small UI — notes from Podcast Discovery Wheel | MG Ghanbari</title>
-      <link>https://mg-ghanbari.netlify.app/notes/ai-behind-a-small-ui</link>
-      <guid isPermaLink="true">https://mg-ghanbari.netlify.app/notes/ai-behind-a-small-ui</guid>
+      <link>https://massimojj.github.io/mg-ghanbari/notes/ai-behind-a-small-ui</link>
+      <guid isPermaLink="true">https://massimojj.github.io/mg-ghanbari/notes/ai-behind-a-small-ui</guid>
       <pubDate>Wed, 04 Nov 2026 08:40:41 GMT</pubDate>
     </item>
     <item>
       <title>What 3D actually costs in a browser tab — notes from Sentinel Vanguard | MG Ghanbari</title>
-      <link>https://mg-ghanbari.netlify.app/notes/browser-3d-cost</link>
-      <guid isPermaLink="true">https://mg-ghanbari.netlify.app/notes/browser-3d-cost</guid>
+      <link>https://massimojj.github.io/mg-ghanbari/notes/browser-3d-cost</link>
+      <guid isPermaLink="true">https://massimojj.github.io/mg-ghanbari/notes/browser-3d-cost</guid>
       <pubDate>Wed, 04 Nov 2026 08:40:41 GMT</pubDate>
     </item>
     <item>
       <title>React and a game loop in the same page — notes from Orbit Defender | MG Ghanbari</title>
-      <link>https://mg-ghanbari.netlify.app/notes/canvas-game-loop-react</link>
-      <guid isPermaLink="true">https://mg-ghanbari.netlify.app/notes/canvas-game-loop-react</guid>
+      <link>https://massimojj.github.io/mg-ghanbari/notes/canvas-game-loop-react</link>
+      <guid isPermaLink="true">https://massimojj.github.io/mg-ghanbari/notes/canvas-game-loop-react</guid>
       <pubDate>Wed, 04 Nov 2026 08:40:41 GMT</pubDate>
     </item>
     <item>
       <title>Motion matching on a mobile build — notes from Aether Architect | MG Ghanbari</title>
-      <link>https://mg-ghanbari.netlify.app/notes/motion-matching-mobile</link>
-      <guid isPermaLink="true">https://mg-ghanbari.netlify.app/notes/motion-matching-mobile</guid>
+      <link>https://massimojj.github.io/mg-ghanbari/notes/motion-matching-mobile</link>
+      <guid isPermaLink="true">https://massimojj.github.io/mg-ghanbari/notes/motion-matching-mobile</guid>
       <pubDate>Wed, 04 Nov 2026 08:40:41 GMT</pubDate>
     </item>
   </channel>

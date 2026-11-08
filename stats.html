@@ -151,6 +151,16 @@
         .note strong { color: #9a9a9a; font-weight: 600; }
         .err { color: #d98a8a; font-size: 0.85rem; }
 
+        .pages { display: flex; flex-direction: column; gap: 12px; }
+        .page-row { display: flex; align-items: center; gap: 12px; }
+        .page-rank { width: 20px; color: var(--muted); font-size: 0.82rem; font-variant-numeric: tabular-nums; }
+        .page-main { flex: 1; min-width: 0; }
+        .page-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+        .page-label { font-size: 0.88rem; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .page-count { font-size: 0.85rem; color: var(--gold); font-weight: 600; font-variant-numeric: tabular-nums; }
+        .page-track { height: 5px; background: #1d1d1d; border-radius: 3px; margin-top: 5px; overflow: hidden; }
+        .page-bar { height: 100%; background: linear-gradient(90deg, #e6b45c, #8a6a2f); width: 0; transition: width 0.5s ease; }
+
         @media (max-width: 640px) {
             .cards { grid-template-columns: 1fr; }
             .chart { gap: 4px; height: 130px; }
@@ -189,10 +199,20 @@
             <div class="chart" id="chart"></div>
             <p class="note" id="note">
                 One hit per browsing session — ten pages in one visit counts once. Nothing personal is
-                recorded: no cookies, no IP addresses, no identifiers, no per-page breakdown.
+                recorded: no cookies, no IP addresses, no identifiers. The <strong>Top pages</strong>
+                panel below ranks which pages get the most views.
                 <br><br>
                 <strong>This page is not linked from the site and is excluded from search engines.</strong>
                 Anyone who has the exact URL can open it, so treat the address itself as the key.
+            </p>
+        </div>
+
+        <div class="panel" style="margin-top:16px;">
+            <h2>Top pages — by sessions</h2>
+            <div id="pages" class="pages"></div>
+            <p class="note" id="pages-note">
+                Sessions that opened each page (counted once per page, per visit). Builds up as people
+                browse — it starts empty.
             </p>
         </div>
 
@@ -260,7 +280,82 @@
                         col.appendChild(lbl);
                         chart.appendChild(col);
                     });
+
+                    loadPages();
                 });
+
+                function loadPages() {
+                    var PAGES = [
+                        { s: 'home', t: 'Home' },
+                        { s: 'ai-ghan-cinematic', t: 'Ghan Cinematic — AI Film Studio' },
+                        { s: 'apps-a-history-rendered', t: 'A History Rendered' },
+                        { s: 'apps-aether-architect', t: 'Aether Architect' },
+                        { s: 'apps-arcane-like', t: 'Arcane Like' },
+                        { s: 'apps-character-animation-showreel', t: 'Character Animation Showreel' },
+                        { s: 'apps-harmony-heart-pro', t: 'Harmony Heart Pro' },
+                        { s: 'apps-marvelous-designer', t: 'Marvelous Designer Showreel' },
+                        { s: 'apps-modern-villa', t: 'Modern Villa Exploration' },
+                        { s: 'apps-molten-flow', t: 'Molten Flow' },
+                        { s: 'apps-news-animation', t: 'News Animation' },
+                        { s: 'apps-orbit-defender', t: 'Orbit Defender' },
+                        { s: 'apps-podcast-discovery-wheel', t: 'Podcast Discovery Wheel' },
+                        { s: 'apps-precision-strike', t: 'Precision Strike' },
+                        { s: 'apps-recipe-roulette', t: 'Recipe Roulette' },
+                        { s: 'apps-sentinel-vanguard', t: 'Sentinel Vanguard' },
+                        { s: 'apps-statue-street-fight', t: 'Statue Street Fight' },
+                        { s: 'apps-visual-alchemy', t: 'Visual Alchemy' },
+                        { s: 'apps-zbrush-sculpt', t: 'ZBrush Sculpt' },
+                        { s: 'notes-ai-behind-a-small-ui', t: 'AI behind a small UI' },
+                        { s: 'notes-browser-3d-cost', t: 'What 3D costs in a browser' },
+                        { s: 'notes-canvas-game-loop-react', t: 'React + a game loop' },
+                        { s: 'notes', t: 'Notes (index)' },
+                        { s: 'notes-motion-matching-mobile', t: 'Motion matching on mobile' }
+                    ];
+                    Promise.all(PAGES.map(function (p) {
+                        return get('p-' + p.s).then(function (v) { return { t: p.t, v: v || 0 }; });
+                    })).then(function (rows) {
+                        var box = document.getElementById('pages');
+                        var note = document.getElementById('pages-note');
+                        var max = Math.max.apply(null, rows.map(function (r) { return r.v; }).concat([1]));
+                        if (!rows.some(function (r) { return r.v > 0; })) {
+                            note.textContent = 'No page data yet — once people visit, the most-viewed pages appear here.';
+                            return;
+                        }
+                        rows.sort(function (a, b) { return b.v - a.v; });
+                        box.innerHTML = '';
+                        rows.forEach(function (r, i) {
+                            var row = document.createElement('div');
+                            row.className = 'page-row';
+                            var pct = Math.round(r.v / max * 100);
+                            var rank = document.createElement('span');
+                            rank.className = 'page-rank';
+                            rank.textContent = String(i + 1);
+                            var main = document.createElement('div');
+                            main.className = 'page-main';
+                            var top = document.createElement('div');
+                            top.className = 'page-top';
+                            var label = document.createElement('span');
+                            label.className = 'page-label';
+                            label.textContent = r.t;
+                            var count = document.createElement('span');
+                            count.className = 'page-count';
+                            count.textContent = r.v.toLocaleString();
+                            top.appendChild(label);
+                            top.appendChild(count);
+                            var track = document.createElement('div');
+                            track.className = 'page-track';
+                            var bar = document.createElement('div');
+                            bar.className = 'page-bar';
+                            bar.style.width = pct + '%';
+                            track.appendChild(bar);
+                            main.appendChild(top);
+                            main.appendChild(track);
+                            row.appendChild(rank);
+                            row.appendChild(main);
+                            box.appendChild(row);
+                        });
+                    });
+                }
         })();
     </script>
 <button id="site-back-btn" type="button" aria-label="Go back one step" onclick="if(window.history.length>1){window.history.back();}else{var r=document.referrer||'';var s=false;if(r){if(location.protocol==='file:'){s=r.indexOf('file://')===0;}else{s=r.indexOf(location.origin)===0;}}if(r&&r!==location.href&&s){location.href=r;}else{var p=location.pathname;location.href=(p.indexOf('/apps/')!==-1||p.indexOf('/notes/')!==-1||p.indexOf('/ai/')!==-1)?('../index.html'):('index.html');}}" style="position:fixed;left:16px;bottom:16px;z-index:2147483000;display:inline-flex;align-items:center;gap:.4em;padding:.6rem .95rem;border:0;border-radius:999px;background:#11131ae6;color:#fff;opacity:.92;font:600 .85rem/1 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;letter-spacing:.02em;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.4);backdrop-filter:blur(6px);">&#8592; Back</button>

@@ -11,9 +11,9 @@ import json
 import html
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE = "https://mg-ghanbari.netlify.app"
+BASE = "https://massimojj.github.io/mg-ghanbari"
 
-SKIP_DIRS = {"assets", "scripts", "node_modules", ".git", ".netlify"}
+SKIP_DIRS = {"assets", "scripts", "node_modules", ".git"}
 PAGES = ["index.html"]
 for d in sorted(os.listdir(ROOT)):
     if d in SKIP_DIRS or not os.path.isdir(os.path.join(ROOT, d)):
@@ -37,7 +37,7 @@ def slug_for(page):
 
 
 def url_for(page):
-    """Netlify serves pretty URLs (/apps/x), so canonicals must match them."""
+    """Pages are served at pretty URLs (/apps/x), so canonicals must match them."""
     if page == "index.html":
         return BASE + "/"
     if page.endswith("/index.html"):
