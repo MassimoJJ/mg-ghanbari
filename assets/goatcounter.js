@@ -4,12 +4,12 @@
  * GC_CODE is the site code chosen at https://www.goatcounter.com
  * (your dashboard is then https://<GC_CODE>.goatcounter.com).
  *
- * It is pre-set to "mgghanbari"; once that site is created and the signup
- * email is verified, tracking goes live automatically. To use a different
+ * It is set to "massimojavier" (the code registered on GoatCounter). Once the
+ * signup email is verified, tracking goes live automatically. To use a different
  * code, change the value below (or ask and I'll change it).
  */
 (function () {
-    var GC_CODE = "mgghanbari";
+    var GC_CODE = "massimojavier";
     if (!GC_CODE || GC_CODE === "REPLACE_WITH_YOUR_GOATCOUNTER_CODE") return;
 
     // Documented dynamic-load method: point the endpoint, then load count.js.
