@@ -47,6 +47,33 @@ page — the URL is the key:
 
     https://massimojj.github.io/mg-ghanbari/stats.html
 
+A second, richer dashboard lives at https://massimojavier.goatcounter.com
+(referrers, browsers, countries, devices).
+
+## Search engine discovery (automatic)
+
+`.github/workflows/discover.yml` runs on every push that changes a page, weekly
+on Mondays, and on demand. It:
+
+1. regenerates `sitemap.xml` (per-page `lastmod` from git history) and `feed.xml`
+   via `scripts/build.mjs`, committing them if they changed;
+2. submits **every** URL to the Bing Webmaster API and to the IndexNow network
+   (Bing, Yandex, Seznam, Naver) via `scripts/ping-engines.mjs`.
+
+`BING_API_KEY` is stored as a GitHub Actions repository secret. The 32-hex
+`.txt` file at the site root is the IndexNow key. Google has no public
+unauthenticated submission API; it discovers the site from the sitemap declared
+in `robots.txt`, the Google Search Console verification tags, and backlinks
+(the public GitHub repo and profile README).
+
+Manual run:
+
+```bash
+gh workflow run discover.yml --repo MassimoJJ/mg-ghanbari
+# or locally:
+BING_API_KEY=... node scripts/ping-engines.mjs
+```
+
 ## Video
 
 Clips are H.264 MP4, `+faststart`, and served from the same origin. Keep them
