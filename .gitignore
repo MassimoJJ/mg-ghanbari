@@ -11,3 +11,6 @@ desktop.ini
 
 # Netlify CLI local cache (no longer deployed here)
 .netlify/
+
+# GitHub Actions workflow needs the OAuth "workflow" scope; kept as a template in scripts/
+.github/workflows/discover.yml

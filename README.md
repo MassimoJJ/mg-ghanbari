@@ -50,29 +50,33 @@ page — the URL is the key:
 A second, richer dashboard lives at https://massimojavier.goatcounter.com
 (referrers, browsers, countries, devices).
 
-## Search engine discovery (automatic)
+## Search engine discovery
 
-`.github/workflows/discover.yml` runs on every push that changes a page, weekly
-on Mondays, and on demand. It:
+`scripts/ping-engines.mjs` submits **every** URL in `sitemap.xml` to the free
+submission APIs: the Bing Webmaster API (Bing, DuckDuckGo, Yahoo, Ecosia) and
+IndexNow (Bing, Yandex, Seznam, Naver). `scripts/build.mjs` regenerates the
+sitemap (per-page `lastmod` from git history) and the notes RSS feed.
 
-1. regenerates `sitemap.xml` (per-page `lastmod` from git history) and `feed.xml`
-   via `scripts/build.mjs`, committing them if they changed;
-2. submits **every** URL to the Bing Webmaster API and to the IndexNow network
-   (Bing, Yandex, Seznam, Naver) via `scripts/ping-engines.mjs`.
-
-`BING_API_KEY` is stored as a GitHub Actions repository secret. The 32-hex
-`.txt` file at the site root is the IndexNow key. Google has no public
-unauthenticated submission API; it discovers the site from the sitemap declared
-in `robots.txt`, the Google Search Console verification tags, and backlinks
-(the public GitHub repo and profile README).
-
-Manual run:
+Run it any time:
 
 ```bash
-gh workflow run discover.yml --repo MassimoJJ/mg-ghanbari
-# or locally:
 BING_API_KEY=... node scripts/ping-engines.mjs
 ```
+
+The 32-hex `.txt` file at the site root is the IndexNow key. `BING_API_KEY` is
+also stored as a GitHub Actions repository secret.
+
+Google has no public unauthenticated submission API (its old sitemap-ping
+endpoint is retired). Googlebot discovers the site from the sitemap declared in
+`robots.txt`, the Google Search Console verification tags, and backlinks from
+the public GitHub repo and profile README.
+
+`scripts/discover-workflow.yml.template` is a ready-to-use GitHub Actions
+workflow that runs this on every push and weekly. To enable it, copy it to
+`.github/workflows/discover.yml` using a token that has the `workflow` OAuth
+scope (`gh auth refresh -s workflow`) — the current token has only `repo`,
+`gist` and `read:org`, so GitHub rejects that path. Until then, a scheduled
+local automation runs the same steps weekly at no cost.
 
 ## Video
 
