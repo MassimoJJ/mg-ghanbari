@@ -17,6 +17,8 @@
 
     var s = document.createElement("script");
     s.async = true;
-    s.src = "https://gc.zgo.at/count.js";
+    // Vendored copy: gc.zgo.at is unreachable on some networks, which silently
+    // kills tracking. Serving it from this origin keeps the tracker working.
+    s.src = "assets/goatcounter-count.js";
     document.head.appendChild(s);
 })();
