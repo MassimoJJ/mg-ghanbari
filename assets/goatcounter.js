@@ -9,7 +9,7 @@
  * code, change the value below (or ask and I'll change it).
  */
 (function () {
-    var GC_CODE = "massimojavier";
+    var GC_CODE = "mgghanbari";
     if (!GC_CODE || GC_CODE === "REPLACE_WITH_YOUR_GOATCOUNTER_CODE") return;
 
     // Documented dynamic-load method: point the endpoint, then load count.js.
