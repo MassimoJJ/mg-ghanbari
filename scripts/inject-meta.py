@@ -76,6 +76,7 @@ def build_block(page):
         "knowsAbout": ["3D modelling", "VFX", "Unreal Engine", "Blender", "ZBrush",
                        "Character animation", "AI automation", "Game development"],
         "sameAs": [
+            "https://www.instagram.com/ghammahmoud/",
             "https://www.behance.net/massimojaver_xartist",
             "https://www.artstation.com/massimo83",
             "https://www.linkedin.com/in/massimo-javer-277a16326/",
