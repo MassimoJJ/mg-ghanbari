@@ -606,3 +606,42 @@ header {
     .detail-footer { padding: 32px 18px 44px; }
     .spec-table th { width: 38%; }
 }
+
+/* Related work — links between sibling pages so crawlers can walk the site
+   instead of bouncing back to the home page. */
+.related {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 24px 8px;
+}
+.related h2 {
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+    margin: 0 0 14px;
+    font-weight: 600;
+}
+.related-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.related-list a {
+    display: block;
+    padding: 14px 16px;
+    border: 1px solid #1c1c1c;
+    border-radius: 10px;
+    color: #e9e9e9;
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 1.35;
+    transition: border-color .18s ease, background .18s ease;
+}
+.related-list a:hover {
+    border-color: #3a3a3a;
+    background: #121212;
+}
