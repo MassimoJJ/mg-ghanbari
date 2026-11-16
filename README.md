@@ -82,3 +82,16 @@ local automation runs the same steps weekly at no cost.
 
 Clips are H.264 MP4, `+faststart`, and served from the same origin. Keep them
 under ~5 MB each; anything heavier should be re-encoded before committing.
+
+## Selected work
+
+Each piece has its own page — these are the direct links:
+
+- Precision Strike: The Silent Sniper — https://massimojj.github.io/mg-ghanbari/apps/precision-strike
+- Molten Flow: A Liquid Simulation Study — https://massimojj.github.io/mg-ghanbari/apps/molten-flow
+- Visual Alchemy: Transforming Concepts into 3D Reality — https://massimojj.github.io/mg-ghanbari/apps/visual-alchemy
+- Unreal Engine: Interactive Modern Villa Exploration — https://massimojj.github.io/mg-ghanbari/apps/modern-villa
+- Aether Architect — https://massimojj.github.io/mg-ghanbari/apps/aether-architect
+- Sentinel Vanguard — https://massimojj.github.io/mg-ghanbari/apps/sentinel-vanguard
+- Ghan Cinematic — AI Film Studio — https://massimojj.github.io/mg-ghanbari/ai/ghan-cinematic
+- Notes — https://massimojj.github.io/mg-ghanbari/notes/
