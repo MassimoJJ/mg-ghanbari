@@ -10,6 +10,7 @@ import os
 import re
 import json
 import html
+import subprocess
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://massimojj.github.io/mg-ghanbari"
@@ -82,6 +83,47 @@ def portfolio_items():
             "image": absolute(img.group(1)) if img else "",
         })
     return items
+
+
+def faq_items():
+    """Read the visible FAQ on the homepage for FAQPage structured data."""
+    s = read("index.html")
+    items = []
+    for match in re.finditer(
+        r'<div\s+class="faq-item"\s*>\s*<h3>(.*?)</h3>\s*<p>(.*?)</p>\s*</div>',
+        s, re.S | re.I,
+    ):
+        question = clean(match.group(1))
+        answer = clean(match.group(2))
+        if question and answer:
+            items.append({
+                "@type": "Question",
+                "name": question,
+                "acceptedAnswer": {"@type": "Answer", "text": answer},
+            })
+    return items
+
+
+def git_modified(page):
+    try:
+        out = subprocess.check_output(
+            ["git", "log", "-1", "--format=%cI", "--", page],
+            cwd=ROOT, stderr=subprocess.DEVNULL, text=True,
+        ).strip()
+        return out or None
+    except Exception:
+        return None
+
+
+def entities_for(page, s):
+    """Entity hints taken from terms actually present on the page."""
+    haystack = (page + " " + s).lower()
+    known = [
+        "Unreal Engine", "Blender", "ZBrush", "Marvelous Designer", "Gemini",
+        "OpenAI", "Grok", "Replicate", "React", "Capacitor", "Android",
+        "motion matching", "VFX", "compositing", "AI automation",
+    ]
+    return [term for term in known if term.lower() in haystack][:6]
 
 
 def person_node():
@@ -204,9 +246,19 @@ def build_block(page):
                     "description": ("Available for character art, environment and set work, animation, "
                                     "VFX and simulation, cinematic and game/app work."),
                 },
+                {
+                    "@type": "FAQPage",
+                    "@id": BASE + "/#faq",
+                    "url": BASE + "/#faq",
+                    "name": "Questions people ask about MG Ghanbari",
+                    "isPartOf": {"@id": BASE + "/#website"},
+                    "mainEntity": faq_items(),
+                },
             ],
         }
     else:
+        entities = entities_for(page, h1 + " " + desc)
+        modified = git_modified(page)
         ld = {
             "@context": "https://schema.org",
             "@graph": [
@@ -225,15 +277,22 @@ def build_block(page):
                     "isAccessibleForFree": True,
                     "isPartOf": {"@id": BASE + "/#website"},
                 },
-                {
-                    "@type": "BreadcrumbList",
-                    "itemListElement": [
-                        {"@type": "ListItem", "position": 1, "name": "Home", "item": BASE + "/"},
-                        {"@type": "ListItem", "position": 2, "name": h1, "item": url},
-                    ],
-                },
             ],
         }
+        if entities:
+            ld["@graph"][1]["keywords"] = ", ".join(entities)
+            ld["@graph"][1]["about"] = [
+                {"@type": "Thing", "name": term} for term in entities
+            ]
+        if modified:
+            ld["@graph"][1]["dateModified"] = modified
+        ld["@graph"].append({
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Home", "item": BASE + "/"},
+                {"@type": "ListItem", "position": 2, "name": h1, "item": url},
+            ],
+        })
 
     e = html.escape
     lines = [

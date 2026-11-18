@@ -12,5 +12,9 @@ desktop.ini
 # Netlify CLI local cache (no longer deployed here)
 .netlify/
 
+# Python caches from local SEO generators
+__pycache__/
+*.pyc
+
 # GitHub Actions workflow needs the OAuth "workflow" scope; kept as a template in scripts/
 .github/workflows/discover.yml
