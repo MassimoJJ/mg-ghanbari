@@ -29,3 +29,11 @@ which version of the work is being described.
 
 This still cannot force ChatGPT, Gemini or Perplexity to cite the site. It
 raises the chance that a crawl produces correct, quotable facts.
+
+## Live verification (after deployment)
+
+- Homepage JSON-LD types: Person, WebSite, CollectionPage, Service, FAQPage.
+- FAQPage contains 6 questions and 6 answers.
+- Ghan Cinematic page: keywords `Gemini, OpenAI`; `dateModified` from git.
+- `llms.txt`, `llms-full.txt`, `robots.txt`, `sitemap.xml` all HTTP 200.
+- Free IndexNow re-ping accepted by api.indexnow.org, Bing, Yandex and Seznam.
