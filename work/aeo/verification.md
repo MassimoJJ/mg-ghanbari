@@ -1,43 +1,87 @@
-# AI-search verification — 2026-11-18
+# Verification report - MG Ghanbari portfolio (AEO / LLMO deliverable)
 
-Site: https://massimojj.github.io/mg-ghanbari/index.html#works
+- Verifier: oracle (second opinion / fact-check)
+- Date of checks: 2026-11-18 (retrieval timestamp 2026-11-18T17:26:31Z)
+- Mode: verification only. No new job planned, nothing rebuilt.
+- Scope: https://massimojj.github.io/mg-ghanbari/index.html#works and the four machine-readable files.
 
-## Live checks (HTTP 200)
+## What was fetched
 
-- `index.html` — contains `id="works"`, `id="ai"`, `id="apps"`; 19 `card-desc` paragraphs.
-- `llms.txt` — 5741 bytes; canonical home, services, citation guidance, links to sitemap/feed/full text.
-- `llms-full.txt` — 6522 bytes; 19 project entries plus technical notes.
-- `robots.txt` — allows `*` plus GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot,
-  Claude-Web, PerplexityBot, Google-Extended, Applebot-Extended and CCBot.
-- `sitemap.xml` — 27 URLs, per-page `lastmod`.
+| URL | Status | Size |
+|---|---|---|
+| /index.html | 200 | 60,285 bytes |
+| /llms.txt | 200 | 5,723 bytes |
+| /llms-full.txt | 200 | 6,464 bytes |
+| /robots.txt | 200 | 791 bytes |
+| /sitemap.xml | 200 | 5,755 bytes |
 
-## Structured data
+All five URLs returned HTTP 200 and real content; none was an error page, login wall or empty shell.
 
-Homepage JSON-LD `@graph` (parsed from live HTML):
+## Anchor check
 
-- `Person`
-- `WebSite` (with `SearchAction`)
-- `CollectionPage` (`@id .../works`) with `ItemList` of **19** `CreativeWork` entries
-- `Service` (provider = Person, worldwide)
+The requested fragments exist as element IDs in the served HTML: `#works`, `#ai`, `#apps` are all present.
+The full ID list is: top, work, tab-works, works, disciplines, tab-ai, ai, tab-apps, apps, contact,
+brief-form, brief-name, brief-need, brief-body. There are no `name=` anchors; the sections are
+targeted by `id`, which is what `#works` / `#ai` / `#apps` resolve to. No gap.
 
-Project and note pages carry `Person`, `CreativeWork` and `BreadcrumbList`.
+## JSON-LD check
 
-## Free discovery submissions
+One `<script type="application/ld+json">` block, containing a `@graph` of exactly four typed nodes:
+Person, WebSite, CollectionPage, Service - the required set.
 
-`node scripts/ping-engines.mjs` run after deployment:
+- CollectionPage `@id` = `.../#works`, `isPartOf` -> website, `about` -> person.
+- `mainEntity` is an ItemList with `numberOfItems: 19` and exactly 19 `ListItem` entries.
+- Positions run 1 to 19 with no gaps or duplicates.
+- Each item is a CreativeWork carrying name, url, creator, isPartOf, description and image.
+- Service node present: "3D, VFX and AI production", with 7 service offers and an availability
+  description.
 
-- IndexNow api.indexnow.org — HTTP 200 accepted
-- IndexNow www.bing.com — HTTP 200 accepted
-- IndexNow yandex.com — HTTP 202 accepted
-- IndexNow search.seznam.cz — HTTP 200 accepted
-- Bing Webmaster API skipped (no `BING_API_KEY` in environment)
+So the JSON-LD matches the requested shape: 4 types, 19 items, declared count equals actual count.
 
-## Commits pushed
+## Visible card descriptions
 
-- `5516ea7` Improve AI-search discoverability: anchors, descriptions, structured data, llms files
-- `5b42c94` Reconcile AI-search metadata with latest site copy
+Parsed card markup in the page:
 
-## Note
+- `.card` elements: 19
+- `.card-content`: 19
+- `.card-title`: 19
+- `.card-desc`: 19
+- `.card-desc` containing a `<p>` with more than 20 characters: 19 of 19
 
-`https://mg-ghanbari.netlify.app/` currently returns HTTP 404; the working,
-submitted deployment is GitHub Pages. No paid service was used.
+Description lengths range from 57 to 211 characters, so all 19 cards render a real sentence,
+not a placeholder. `.card-desc` is styled in normal flow (`font-size: 0.86rem`, colour `#888888`);
+no `display:none`, `visibility:hidden` or `opacity:0` rule targets `.card-desc`, so the descriptions
+are visible rather than hidden. Verdict: 19 of 19 visible.
+
+## AI crawler access
+
+robots.txt contains `User-agent: *` + `Allow: /`, plus explicit groups for GPTBot, OAI-SearchBot,
+ChatGPT-User, ClaudeBot, Claude-Web, PerplexityBot, Google-Extended, Applebot-Extended and CCBot -
+each `Allow: /`. AI crawlers are therefore allowed both by the wildcard and by name.
+The file also declares the sitemap and deliberately omits `/stats.html`, which carries a noindex tag;
+that is correct behaviour (naming a noindex URL in robots.txt would only advertise it).
+
+## Supporting files
+
+- sitemap.xml: 27 `<url>` entries.
+- llms-full.txt: 26 project headings, and all 19 project URLs from the JSON-LD ItemList are present;
+  the missing-URL check returned an empty list.
+- llms.txt: carries the canonical home, the works URL, contact address, services list and pointers to
+  the machine-readable files.
+
+## Verdict
+
+Correct. The live deployment matches the specification: the three anchors exist, the JSON-LD carries
+Person + WebSite + CollectionPage + Service with 19 declared and 19 actual items, all 19 card
+descriptions are present and visible, and AI crawlers are allowed. No blocking gap.
+
+## Residual notes (non-blocking, not defects)
+
+1. The served HTML does not contain the literal string `index.html#works`; the homepage reaches the
+   section via `#works`. The full `.../index.html#works` URL is published in llms.txt, so the
+   canonical link target is still advertised to machines. No action needed.
+2. The three `display:none` rules in the stylesheet belong to other components, not to `.card-desc`;
+   no card description is hidden by them.
+3. The plain-text fetch rendered a handful of em/en dashes as U+FFFD. The page declares UTF-8, so this
+   is consistent with the retrieval decoding rather than with the site; it does not affect anchors,
+   JSON-LD or robots. Worth a quick visual glance only if rendered typography matters.
