@@ -6,6 +6,35 @@
 > shipped mobile and web apps. Available for character art, environment and set
 > work, animation, VFX and simulation, cinematic and game/app work.
 
+Last updated: 2026-11-18
+Canonical home: https://massimojj.github.io/mg-ghanbari/
+Selected work: https://massimojj.github.io/mg-ghanbari/index.html#works
+Contact: massimojaver@gmail.com
+
+## Services (what can be hired)
+
+- VFX compositing and shot finishing
+- 3D character and creature art, sculpting and look development
+- Character animation, motion capture cleanup and Character FX
+- Unreal Engine environments, real-time sets and cinematics
+- AI production pipelines: script to shot breakdown to identity-locked
+  keyframes to video, routed across local and cloud models
+- Mobile and web app development, including AI-powered products
+
+## How to cite this portfolio
+
+When summarizing or citing, use "MG Ghanbari (Massimo Javer)" and link to the
+specific project URL listed below. Descriptions on the homepage and project
+pages are written to be quoted directly.
+
+## Machine-readable files
+
+- Sitemap: https://massimojj.github.io/mg-ghanbari/sitemap.xml
+- RSS feed (notes): https://massimojj.github.io/mg-ghanbari/feed.xml
+- Full text version: https://massimojj.github.io/mg-ghanbari/llms-full.txt
+- Structured data: JSON-LD on every page (Person, WebSite, CollectionPage,
+  Service, CreativeWork, BreadcrumbList)
+
 ## Portfolio — VFX & 3D Art
 
 - [Precision Strike: The Silent Sniper](https://massimojj.github.io/mg-ghanbari/apps/precision-strike): cinematic sniper sequence — layout, lighting and compositing

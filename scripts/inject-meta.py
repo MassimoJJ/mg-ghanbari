@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Injects SEO/social metadata into every page: canonical, Open Graph, Twitter
-card and JSON-LD. Idempotent — re-running replaces the block it wrote before.
+Injects SEO/AEO metadata into every page: canonical, Open Graph, Twitter
+card, crawler hints and JSON-LD. Idempotent — re-running replaces the block
+it wrote before.
 
 Run locally after adding a page:  python scripts/inject-meta.py
 """
@@ -49,32 +50,59 @@ def read(page):
     return open(os.path.join(ROOT, page), encoding="utf-8", errors="ignore").read()
 
 
-def build_block(page):
-    s = read(page)
-    title = re.search(r"<title>(.*?)</title>", s, re.S)
-    title = html.unescape(re.sub(r"\s+", " ", title.group(1)).strip()) if title else "MG Ghanbari"
+def clean(value):
+    return html.unescape(re.sub(r"<[^>]+>", "", value)).strip()
 
-    desc = re.search(r'<meta\s+name="description"\s+content="([^"]*)"', s)
-    desc = html.unescape(desc.group(1)).strip() if desc else ""
-    if page == "index.html":
-        desc = HOME_DESC
 
-    h1 = re.search(r"<h1[^>]*>(.*?)</h1>", s, re.S)
-    h1 = html.unescape(re.sub(r"<[^>]+>", "", h1.group(1))).strip() if h1 else title
+def absolute(href):
+    if href.startswith("http://") or href.startswith("https://"):
+        return href
+    path = href.split("#")[0].split("?")[0]
+    if path.endswith(".html"):
+        path = path[:-5]
+    return BASE + "/" + path.lstrip("/")
 
-    url = url_for(page)
-    og_img = f"{BASE}/assets/og/{slug_for(page)}.jpg"
-    kind = "website" if page == "index.html" else "article"
 
-    person = {
+def portfolio_items():
+    """Read the visible cards on the homepage so structured data matches the UI."""
+    s = read("index.html")
+    items = []
+    for match in re.finditer(r'<a\s([^>]*\bclass="card"[^>]*)>(.*?)</a>', s, re.S | re.I):
+        attrs, body = match.group(1), match.group(2)
+        href = re.search(r'href="([^"]+)"', attrs, re.I)
+        title = re.search(r'<h3[^>]*class="card-title"[^>]*>(.*?)</h3>', body, re.S | re.I)
+        desc = re.search(r'<p[^>]*class="card-desc"[^>]*>(.*?)</p>', body, re.S | re.I)
+        img = re.search(r'<img[^>]+src="([^"]+)"', body, re.I)
+        if not (href and title):
+            continue
+        items.append({
+            "name": clean(title.group(1)),
+            "description": clean(desc.group(1)) if desc else "",
+            "url": absolute(href.group(1)),
+            "image": absolute(img.group(1)) if img else "",
+        })
+    return items
+
+
+def person_node():
+    return {
         "@type": "Person",
         "@id": BASE + "/#person",
         "name": "Massimo Javer (MG Ghanbari)",
-        "alternateName": "MG Ghanbari",
+        "alternateName": ["MG Ghanbari", "Massimo Javer", "X Artist"],
         "url": BASE + "/",
+        "email": "mailto:massimojaver@gmail.com",
         "jobTitle": "3D & VFX Artist, Developer",
-        "knowsAbout": ["3D modelling", "VFX", "Unreal Engine", "Blender", "ZBrush",
-                       "Character animation", "AI automation", "Game development"],
+        "description": ("3D and VFX artist, filmmaker and developer. Character and creature work, "
+                        "Unreal Engine environments, cinematic animation, AI production pipelines, "
+                        "and shipped mobile and web apps."),
+        "knowsAbout": [
+            "VFX compositing", "Filmmaking", "Character animation", "Creature art",
+            "Motion capture", "Character FX (CFX)", "3D modelling", "ZBrush",
+            "Marvelous Designer", "Blender", "Unreal Engine 5", "Real-time environments",
+            "AI automation", "AI video pipelines", "Game development", "Android apps",
+            "Branding",
+        ],
         "sameAs": [
             "https://www.instagram.com/ghammahmoud/",
             "https://www.behance.net/massimojaver_xartist",
@@ -86,11 +114,49 @@ def build_block(page):
         ],
     }
 
+
+def build_block(page):
+    s = read(page)
+    title = re.search(r"<title>(.*?)</title>", s, re.S)
+    title = html.unescape(re.sub(r"\s+", " ", title.group(1)).strip()) if title else "MG Ghanbari"
+
+    desc = re.search(r'<meta\s+name="description"\s+content="([^"]*)"', s)
+    desc = html.unescape(desc.group(1)).strip() if desc else ""
     if page == "index.html":
+        desc = HOME_DESC
+
+    h1 = re.search(r"<h1[^>]*>(.*?)</h1>", s, re.S)
+    h1 = clean(h1.group(1)) if h1 else title
+
+    url = url_for(page)
+    og_img = f"{BASE}/assets/og/{slug_for(page)}.jpg"
+    kind = "website" if page == "index.html" else "article"
+
+    if page == "index.html":
+        works = portfolio_items()
+        work_items = []
+        for i, item in enumerate(works, 1):
+            node = {
+                "@type": "CreativeWork",
+                "name": item["name"],
+                "url": item["url"],
+                "creator": {"@id": BASE + "/#person"},
+                "isPartOf": {"@id": BASE + "/#works"},
+            }
+            if item["description"]:
+                node["description"] = item["description"]
+            if item["image"]:
+                node["image"] = item["image"]
+            work_items.append({
+                "@type": "ListItem",
+                "position": i,
+                "item": node,
+            })
+
         ld = {
             "@context": "https://schema.org",
             "@graph": [
-                person,
+                person_node(),
                 {
                     "@type": "WebSite",
                     "@id": BASE + "/#website",
@@ -99,6 +165,44 @@ def build_block(page):
                     "description": desc,
                     "publisher": {"@id": BASE + "/#person"},
                     "inLanguage": "en",
+                    "potentialAction": {
+                        "@type": "SearchAction",
+                        "target": BASE + "/?q={search_term_string}",
+                        "query-input": "required name=search_term_string",
+                    },
+                },
+                {
+                    "@type": "CollectionPage",
+                    "@id": BASE + "/#works",
+                    "url": BASE + "/#works",
+                    "name": "Selected work — VFX, 3D, AI and apps",
+                    "description": ("Selected projects by MG Ghanbari: cinematic VFX and composites, "
+                                    "character and creature art, Unreal Engine environments, AI film "
+                                    "pipelines and shipped mobile/web apps."),
+                    "isPartOf": {"@id": BASE + "/#website"},
+                    "about": {"@id": BASE + "/#person"},
+                    "inLanguage": "en",
+                    "mainEntity": {
+                        "@type": "ItemList",
+                        "numberOfItems": len(work_items),
+                        "itemListElement": work_items,
+                    },
+                },
+                {
+                    "@type": "Service",
+                    "@id": BASE + "/#services",
+                    "name": "3D, VFX and AI production",
+                    "serviceType": [
+                        "VFX compositing", "3D character and creature art",
+                        "Character animation", "Unreal Engine environments",
+                        "Cinematic animation", "AI production pipelines",
+                        "Mobile and web app development",
+                    ],
+                    "provider": {"@id": BASE + "/#person"},
+                    "areaServed": {"@type": "Place", "name": "Worldwide"},
+                    "url": BASE + "/#works",
+                    "description": ("Available for character art, environment and set work, animation, "
+                                    "VFX and simulation, cinematic and game/app work."),
                 },
             ],
         }
@@ -106,16 +210,19 @@ def build_block(page):
         ld = {
             "@context": "https://schema.org",
             "@graph": [
-                person,
+                person_node(),
                 {
                     "@type": "CreativeWork",
+                    "@id": url + "#creativework",
                     "name": h1,
                     "headline": h1,
                     "description": desc,
                     "url": url,
                     "image": og_img,
+                    "author": {"@id": BASE + "/#person"},
                     "creator": {"@id": BASE + "/#person"},
                     "inLanguage": "en",
+                    "isAccessibleForFree": True,
                     "isPartOf": {"@id": BASE + "/#website"},
                 },
                 {
@@ -132,12 +239,16 @@ def build_block(page):
     lines = [
         START,
         f'<link rel="canonical" href="{url}">',
+        f'<link rel="alternate" type="text/plain" href="{BASE}/llms.txt" title="LLM-friendly site summary">',
+        f'<link rel="alternate" type="text/plain" href="{BASE}/llms-full.txt" title="LLM-friendly full portfolio text">',
+        '<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">',
         f'<meta name="msvalidate.01" content="{BING_VERIFY}">',
         '<link rel="icon" href="/favicon.ico" sizes="any">',
         '<link rel="icon" type="image/png" href="/favicon.png">',
         '<link rel="apple-touch-icon" href="/apple-touch-icon.png">',
         f'<meta property="og:type" content="{kind}">',
         '<meta property="og:site_name" content="MG Ghanbari">',
+        '<meta property="og:locale" content="en_US">',
         f'<meta property="og:title" content="{e(title)}">',
         f'<meta property="og:description" content="{e(desc)}">',
         f'<meta property="og:url" content="{url}">',

@@ -1,6 +1,35 @@
 User-agent: *
 Allow: /
 
+# Answer engines and AI crawlers are welcome. Explicit groups make the intent
+# unambiguous to operators who inspect this file rather than relying on *.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 # Note: /stats.html is deliberately NOT listed here. It carries a noindex tag,
 # and naming it in robots.txt would only advertise the URL — robots.txt is public.
 # Disallowing it would also stop crawlers reading the noindex tag, which is worse.

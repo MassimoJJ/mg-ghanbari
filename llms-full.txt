@@ -1,0 +1,165 @@
+# MG Ghanbari — full context
+
+Portfolio of MG Ghanbari (Massimo Javer): 3D and VFX artist, filmmaker and developer.
+Canonical: https://massimojj.github.io/mg-ghanbari/
+Contact: massimojaver@gmail.com
+
+## Projects
+
+### Precision Strike: The Silent Sniper
+
+Cinematic sniper sequence — layout, lighting and compositing.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/precision-strike
+
+### Character Animation Showreel
+
+Character animation reel with performance, timing and body mechanics.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/character-animation-showreel
+
+### Marvelous Designer Showreel
+
+Cloth simulation and garment work reel built in Marvelous Designer.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/marvelous-designer
+
+### Unreal Engine: Interactive Modern Villa Exploration
+
+Real-time architectural walkthrough built in Unreal Engine.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/modern-villa
+
+### Molten Flow: A Liquid Simulation Study
+
+Liquid and molten material simulation study with art-directed shading.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/molten-flow
+
+### Visual Alchemy: Transforming Concepts into 3D Reality
+
+Concept-to-3D production breakdown, from blockout to final render.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/visual-alchemy
+
+### Statue Street Fight
+
+Stylised character and action piece with combat choreography.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/statue-street-fight
+
+### Zbrush Sculpt - Angry Dude
+
+Digital sculpture and character bust with expression and material detail.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/zbrush-sculpt
+
+### Unreal Engine: Cinematic Short Film- A History Rendered
+
+Cinematic short film made in Unreal Engine — lighting, layout and edit.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/a-history-rendered
+
+### News Animation — Stylised Broadcast Characters
+
+Stylised broadcast characters for animated news segments.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/news-animation
+
+### Arcane Like - Break the Unknown
+
+Stylised cinematic in an Arcane-inspired look — characters, FX and comp.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/arcane-like
+
+### Showreel & VFX Breakdown
+
+VFX breakdown showreel covering compositing, simulation and shot finishing.
+
+URL: https://www.behance.net/gallery/197062817/Showreel-VFX-Breakdown-By-X-Artist
+
+### Ghan Cinematic — AI Film Studio
+
+End-to-end cinematic pipeline: script → 10s shot breakdown → identity-locked keyframes → video, routed across 10 providers — local Qwen/ComfyUI or cloud (Grok, Gemini, OpenAI, Replicate) — with per-shot retries.
+
+URL: https://massimojj.github.io/mg-ghanbari/ai/ghan-cinematic
+
+### Sentinel Vanguard
+
+3D space combat with tactical boss interception — hangar loadouts, laser / plasma / spread, shields and hull, bombs and overdrive, and bosses that arrive with their own health bar.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/sentinel-vanguard
+
+### Aether Architect
+
+Third-person adventure for Android in Unreal Engine 5.8 — floating islands, crystal pickups and a gate that stays shut until the count is met. Motion-matching locomotion, StateTree behaviour.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/aether-architect
+
+### Harmony Heart Pro (NVC Edition)
+
+An AI-powered Non-Violent Communication coach for couples. Gemini-driven, in five languages, on Android via Capacitor, with Supabase underneath.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/harmony-heart-pro
+
+### Recipe Roulette
+
+Five dropdowns — mood, energy, cuisine, diet, time cap — and one gold SPIN. It returns a full recipe card: timings, servings, cost per serving and a video tutorial already matched to the dish.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/recipe-roulette
+
+### Podcast Discovery Wheel
+
+Pick a category, spin a gold dial, get one episode instead of a feed — with an AI summary, similar discoveries and a Gemini-powered chat for what to listen to next.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/podcast-discovery-wheel
+
+### Orbit Defender
+
+A top-down space shooter for Android — scatter, laser and plasma weapons, bombs, shields and a boss that announces itself. React + Canvas 2D, packaged with Capacitor.
+
+URL: https://massimojj.github.io/mg-ghanbari/apps/orbit-defender
+
+## Technical notes
+
+### Putting an AI behind a small UI — notes from Podcast Discovery Wheel | MG Ghanbari
+
+What a summary actually needs, why the loading state is design work, and why the chat panel and the spin button cannot share the same trust model.
+
+URL: https://massimojj.github.io/mg-ghanbari/notes/ai-behind-a-small-ui
+
+### Routing a script to finished shots across ten AI providers — notes from Ghan Cinematic | MG Ghanbari
+
+A script becomes a shot list, a shot list becomes keyframes, keyframes become video — and each step fails differently. The notes from building that pipeline.
+
+URL: https://massimojj.github.io/mg-ghanbari/notes/ai-pipeline-ten-providers
+
+### What 3D actually costs in a browser tab — notes from Sentinel Vanguard | MG Ghanbari
+
+GLB assets, texture memory and frame budget in a browser 3D game — where the cost really lands when the target is a tab, not a console.
+
+URL: https://massimojj.github.io/mg-ghanbari/notes/browser-3d-cost
+
+### React and a game loop in the same page — notes from Orbit Defender | MG Ghanbari
+
+Keeping a canvas game loop out of React's render cycle, touch controls that don't fight the thumb, and what Capacitor changes for Android.
+
+URL: https://massimojj.github.io/mg-ghanbari/notes/canvas-game-loop-react
+
+### Making liquid read as metal — notes from Molten Flow | MG Ghanbari
+
+Viscosity, surface tension and how a molten material reads against light — the notes from a simulation study built to be lit, not just simulated.
+
+URL: https://massimojj.github.io/mg-ghanbari/notes/molten-flow-liquid-sim
+
+### Motion matching on a mobile build — notes from Aether Architect | MG Ghanbari
+
+What PoseSearch, MotionTrajectory, Chooser and the Animation Locomotion Library do in Unreal Engine 5.8 — and what motion matching costs on Android.
+
+URL: https://massimojj.github.io/mg-ghanbari/notes/motion-matching-mobile
+
+### A head study from blockout to finish — notes from Angry Dude | MG Ghanbari
+
+Form first, then the brow and the jaw carrying the expression — what a sculpt actually needs before any detail pass, and what it never needs.
+
+URL: https://massimojj.github.io/mg-ghanbari/notes/zbrush-head-study
