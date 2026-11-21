@@ -84,6 +84,12 @@ End-to-end cinematic pipeline: script → 10s shot breakdown → identity-locked
 
 URL: https://massimojj.github.io/mg-ghanbari/ai/ghan-cinematic
 
+### H3 Director Studio — Local AI Film Timeline
+
+A local director's desk for MiniMax H3 video, with ComfyUI kept headless as the engine. Shots live on a timeline rather than in a node graph: Qwen Image 2.1 makes text-to-image and image-to-image stills, then H3 animates them as text-to-video, first frame, first + last frame, or references + voice. One source portrait is locked across stills and video for consistent identity. “Continue from previous shot's final frame” writes the exact previous final frame as frame 0, attaches a tail clip of the previous shot as a motion reference, and morphs into generated footage with motion-compensated interpolation — no jump, no freeze and no doubled silhouette. Every render is kept as a take with its seed, prompt, graph and log; accepted takes export as one MP4. The code is open source under MIT.
+
+URL: https://massimojj.github.io/mg-ghanbari/ai/h3-director-studio
+
 ### Sentinel Vanguard
 
 3D space combat with tactical boss interception — hangar loadouts, laser / plasma / spread, shields and hull, bombs and overdrive, and bosses that arrive with their own health bar.

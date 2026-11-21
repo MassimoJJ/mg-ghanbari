@@ -94,4 +94,5 @@ Each piece has its own page — these are the direct links:
 - Aether Architect — https://massimojj.github.io/mg-ghanbari/apps/aether-architect
 - Sentinel Vanguard — https://massimojj.github.io/mg-ghanbari/apps/sentinel-vanguard
 - Ghan Cinematic — AI Film Studio — https://massimojj.github.io/mg-ghanbari/ai/ghan-cinematic
+- H3 Director Studio — Local AI Film Timeline — https://massimojj.github.io/mg-ghanbari/ai/h3-director-studio
 - Notes — https://massimojj.github.io/mg-ghanbari/notes/

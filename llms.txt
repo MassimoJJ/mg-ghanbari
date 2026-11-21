@@ -6,7 +6,7 @@
 > shipped mobile and web apps. Available for character art, environment and set
 > work, animation, VFX and simulation, cinematic and game/app work.
 
-Last updated: 2026-11-18
+Last updated: 2026-11-21
 Canonical home: https://massimojj.github.io/mg-ghanbari/
 Selected work: https://massimojj.github.io/mg-ghanbari/index.html#works
 Questions and answers: https://massimojj.github.io/mg-ghanbari/index.html#faq
@@ -53,6 +53,7 @@ pages are written to be quoted directly.
 ## AI & Automation
 
 - [Ghan Cinematic — AI Film Studio](https://massimojj.github.io/mg-ghanbari/ai/ghan-cinematic): end-to-end cinematic pipeline — script to 10s shot breakdown to identity-locked keyframes to video, routed across 10 providers (local Qwen/ComfyUI or cloud Grok, Gemini, OpenAI, Replicate) with per-shot retries
+- [H3 Director Studio — Local AI Film Timeline](https://massimojj.github.io/mg-ghanbari/ai/h3-director-studio): local director's desk for MiniMax H3 — Qwen text-to-image and image-to-image stills, first/last-frame and reference video, character identity lock, exact seamless shot chaining with optical-flow morphing, and ComfyUI as a headless engine
 
 ## Apps & Games
 
