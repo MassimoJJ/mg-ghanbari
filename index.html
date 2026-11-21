@@ -342,37 +342,11 @@
             transform: translateY(0);
         }
 
-        /* Panel layout: keep content off the viewport edge, fill rows, feature a lone project */
+        /* Panel layout: keep content off the viewport edge and fill rows with compact cards */
         main { padding-left: 24px; padding-right: 24px; }
 
-        #tab-apps .grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-
-        .grid-featured { grid-template-columns: 1fr; }
-
-        .grid-featured .card { max-height: none; }
-
-        .grid-featured .card img {
-            width: 100%;
-            height: 340px;
-            object-fit: cover;
-            padding: 0;
-            border: none;
-            border-radius: 0;
-        }
-
-        .grid-featured .card-content { padding: 30px 36px 36px; }
-        .grid-featured .card-content::before { left: 36px; }
-        .grid-featured .card-title { font-size: 1.5rem; letter-spacing: -0.3px; }
-        .grid-featured .card-desc { font-size: 0.96rem; line-height: 1.6; max-width: 72ch; }
-        .grid-featured .card::after { height: 340px; }
-
-        @media (max-width: 860px) {
-            .grid-featured .card img { height: 240px; }
-            .grid-featured .card-content { padding: 24px 22px 28px; }
-            .grid-featured .card-content::before { left: 22px; }
-            .grid-featured .card-title { font-size: 1.28rem; }
-            .grid-featured .card::after { height: 240px; }
-        }
+        #tab-apps .grid,
+        #tab-ai .grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 
         @media (max-width: 640px) {
             main { padding-left: 18px; padding-right: 18px; }
@@ -890,7 +864,7 @@
             <span id="ai" class="anchor-offset" aria-hidden="true"></span>
             <h2 class="section-title">AI &amp; Automation</h2>
             <p class="panel-intro">Two production tools that turn an idea into finished shots — one routes a full script across local and cloud models, the other is a local director's desk for frame-exact shot chaining. Both lock character identity and validate every asset before it is accepted.</p>
-            <div class="grid grid-featured">
+            <div class="grid">
 
                 <!-- Card: Ghan Cinematic -->
                 <a href="ai/ghan-cinematic" class="card">
@@ -903,7 +877,7 @@
 
                 <!-- Card: H3 Director Studio -->
                 <a href="ai/h3-director-studio" class="card">
-                    <img src="assets/h3-director/card.webp" alt="H3 Director Studio — a seamless two-shot gallery sequence">
+                    <img src="assets/h3-director/card.webp" alt="H3 Director Studio timeline with shot tiles and image and video mode controls">
                     <div class="card-content">
                         <h3 class="card-title">H3 Director Studio — Local AI Film Timeline</h3>
                         <p class="card-desc">A local director's desk for MiniMax H3: text-to-image and image-to-image stills, first/last-frame and reference video, one locked character across shots, and exact seamless chaining with optical-flow morphs. ComfyUI stays headless as the engine.</p>
