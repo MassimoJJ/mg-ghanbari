@@ -157,6 +157,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://massimojj.github.io/mg-ghanbari/notes/cloth-that-reads-on-camera</loc>
+    <lastmod>2026-11-21T17:48:14.675Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://massimojj.github.io/mg-ghanbari/notes/molten-flow-liquid-sim</loc>
     <lastmod>2026-11-21T12:52:52+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -171,6 +177,12 @@
   <url>
     <loc>https://massimojj.github.io/mg-ghanbari/notes/unreal-engine-android</loc>
     <lastmod>2026-11-21T12:52:52+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://massimojj.github.io/mg-ghanbari/notes/zbrush-head-sculpt-workflow</loc>
+    <lastmod>2026-11-21T17:48:14.844Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
