@@ -133,6 +133,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://massimojj.github.io/mg-ghanbari/notes/ai-film-pipeline</loc>
+    <lastmod>2026-11-21T11:52:26.744Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://massimojj.github.io/mg-ghanbari/notes/ai-pipeline-ten-providers</loc>
     <lastmod>2026-11-18T18:35:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -159,6 +165,12 @@
   <url>
     <loc>https://massimojj.github.io/mg-ghanbari/notes/motion-matching-mobile</loc>
     <lastmod>2026-11-18T18:35:35+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://massimojj.github.io/mg-ghanbari/notes/unreal-engine-android</loc>
+    <lastmod>2026-11-21T11:52:26.977Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
