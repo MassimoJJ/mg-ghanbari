@@ -312,11 +312,13 @@
             // within the deadline, render whatever arrived and say so.
             var DEADLINE_MS = 45000;
             var finished = false;
-            var timer = setTimeout(function () { finished = true; render(PENDING); }, DEADLINE_MS);
-            var PENDING = null;
+            var timer = setTimeout(function () {
+                finished = true;
+                paint(KEYS.map(function () { return null; }));
+            }, DEADLINE_MS);
 
             function render(res) {
-                if (finished && res === PENDING) { /* already rendered by the timer */ }
+                if (finished) return;
                 finished = true;
                 clearTimeout(timer);
                 paint(res);
