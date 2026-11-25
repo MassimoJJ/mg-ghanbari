@@ -285,7 +285,27 @@
             var days = [];
             for (var i = 13; i >= 0; i--) days.push(isoDay(i));
 
-            Promise.all([get('visits')].concat(days.map(function (d) { return get('d-' + d); })))
+            // Keys in the order the page needs them. The total goes first so a
+            // slow service still shows the headline number early.
+            var KEYS = ['visits'].concat(days.map(function (d) { return 'd-' + d; }));
+
+            // The service drops requests under load, so after the main pass any
+            // key that came back empty gets one more attempt, spaced out.
+            function loadAll() {
+                return Promise.all(KEYS.map(get)).then(function (res) {
+                    var missing = [];
+                    res.forEach(function (v, i) { if (v === null) missing.push(i); });
+                    if (!missing.length) return res;
+                    return missing.reduce(function (chain, i) {
+                        return chain.then(function () {
+                            return wait(2000).then(function () { return fetchOne(KEYS[i]); })
+                                .then(function (v) { if (v !== null) res[i] = v; });
+                        });
+                    }, Promise.resolve()).then(function () { return res; });
+                });
+            }
+
+            loadAll()
                 .then(function (res) {
                     var total = res[0];
                     var series = res.slice(1);
