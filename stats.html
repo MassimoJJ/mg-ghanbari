@@ -325,8 +325,8 @@
             }
 
             loadAll()
-                .then(function (res) { PENDING = res; if (!finished) render(res); })
-                .catch(function () { if (!finished) render(KEYS.map(function () { return null; })); });
+                .then(render)
+                .catch(function () { render(KEYS.map(function () { return null; })); });
 
             function paint(res) {
                     var total = res[0];
