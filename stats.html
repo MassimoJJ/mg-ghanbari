@@ -223,11 +223,57 @@
             var SERVICE = 'https://abacus.jasoncameron.dev';
             var NS = 'mgghanbari-portfolio';
 
+            // The counter service rate-limits bursts, and this page needs ~40
+            // values (total, 14 days, 25 pages). Firing them all at once made
+            // every request fail and the page show "could not reach the
+            // counter service". They now go through a queue with a gap,
+            // retry with backoff, and cache in sessionStorage so a reload is
+            // instant instead of another 40 requests.
+            var GAP_MS = 700;
+            var queue = Promise.resolve();
+            var cache = {};
+            try { cache = JSON.parse(sessionStorage.getItem('vc-cache') || '{}'); } catch (e) { cache = {}; }
+
+            function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+            function fetchOne(key) {
+                var hit = cache[key];
+                if (hit && (Date.now() - hit.t) < 300000) return Promise.resolve(hit.v);
+
+                function attempt(n) {
+                    return fetch(SERVICE + '/get/' + NS + '/' + key, { cache: 'no-store' })
+                        .then(function (r) { return r.ok ? r.json() : null; })
+                        .then(function (d) {
+                            if (d && typeof d.value === 'number') {
+                                cache[key] = { v: d.value, t: Date.now() };
+                                try { sessionStorage.setItem('vc-cache', JSON.stringify(cache)); } catch (e) { /* private mode */ }
+                                return d.value;
+                            }
+                            // "Key not found" is a real answer - that page has
+                            // no visits - so cache it as zero and move on
+                            // instead of retrying a definitive response.
+                            if (d && /key not found/i.test(d.error || '')) {
+                                cache[key] = { v: 0, t: Date.now() };
+                                try { sessionStorage.setItem('vc-cache', JSON.stringify(cache)); } catch (e) { /* private mode */ }
+                                return 0;
+                            }
+                            throw new Error('unexpected body');
+                        })
+                        .catch(function () {
+                            // Backoff: 1s, 4s, then give up on this key.
+                            if (n < 3) return wait(1000 * n * n).then(function () { return attempt(n + 1); });
+                            return null;
+                        });
+                }
+                return attempt(1);
+            }
+
             function get(key) {
-                return fetch(SERVICE + '/get/' + NS + '/' + key, { cache: 'no-store' })
-                    .then(function (r) { return r.ok ? r.json() : null; })
-                    .then(function (d) { return d && typeof d.value === 'number' ? d.value : null; })
-                    .catch(function () { return null; });
+                var run = queue
+                    .then(function () { return wait(GAP_MS); })
+                    .then(function () { return fetchOne(key); });
+                queue = run.then(function () {}, function () {});
+                return run;
             }
 
             function isoDay(offset) {
