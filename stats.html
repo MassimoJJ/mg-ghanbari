@@ -259,9 +259,12 @@
                             }
                             throw new Error('unexpected body');
                         })
-                        .catch(function () {
-                            // Backoff: 1s, 4s, then give up on this key.
-                            if (n < 3) return wait(1000 * n * n).then(function () { return attempt(n + 1); });
+                        .catch(function (err) {
+                            // A network-level failure means the service is
+                            // unreachable, not busy. Retrying a dead socket
+                            // just adds 20 seconds per key, so fail fast.
+                            if (err && err.name === 'TypeError') return null;
+                            if (n < 2) return wait(1500 * n).then(function () { return attempt(n + 1); });
                             return null;
                         });
                 }
@@ -305,8 +308,25 @@
                 });
             }
 
+            // Never leave the page spinning: if the service has not answered
+            // within the deadline, render whatever arrived and say so.
+            var DEADLINE_MS = 45000;
+            var finished = false;
+            var timer = setTimeout(function () { finished = true; render(PENDING); }, DEADLINE_MS);
+            var PENDING = null;
+
+            function render(res) {
+                if (finished && res === PENDING) { /* already rendered by the timer */ }
+                finished = true;
+                clearTimeout(timer);
+                paint(res);
+            }
+
             loadAll()
-                .then(function (res) {
+                .then(function (res) { PENDING = res; if (!finished) render(res); })
+                .catch(function () { if (!finished) render(KEYS.map(function () { return null; })); });
+
+            function paint(res) {
                     var total = res[0];
                     var series = res.slice(1);
 
@@ -348,7 +368,7 @@
                     });
 
                     loadPages();
-                });
+            }
 
                 function loadPages() {
                     var PAGES = [
